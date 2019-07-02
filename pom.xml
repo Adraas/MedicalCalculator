@@ -8,6 +8,7 @@
     <groupId>ru.code.open</groupId>
     <artifactId>medical-calculator</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <name>Web Medical Calculator</name>
     <description>The "Web Medical Calculator" parent Maven module</description>
@@ -51,6 +52,10 @@
             </plugin>
         </plugins>
     </build>
+
+    <modules>
+        <module>repository</module>
+    </modules>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
