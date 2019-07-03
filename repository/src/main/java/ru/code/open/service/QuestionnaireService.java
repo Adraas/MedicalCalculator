@@ -2,13 +2,13 @@ package ru.code.open.service;
 
 import util.SessionUtil;
 import ru.code.open.dao.IDao;
-import ru.code.open.entities.Questionary;
+import ru.code.open.entities.Questionnaire;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class QuestionaryService implements IDao {
+public class QuestionnaireService implements IDao {
 
     SessionUtil sessionUtil = new SessionUtil();
 
@@ -29,12 +29,12 @@ public class QuestionaryService implements IDao {
         String sql = "SELECT * FROM Questionary";
 
         Session session = sessionUtil.getSession();
-        Query query = session.createNativeQuery(sql).addEntity(Questionary.class);
-        List<Questionary> questionaryList = query.list();
+        Query query = session.createNativeQuery(sql).addEntity(Questionnaire.class);
+        List<Questionnaire> questionnaireList = query.list();
 
         sessionUtil.closeTransactionSesstion();
 
-        return questionaryList;
+        return questionnaireList;
     }
 
     @Override
@@ -44,14 +44,14 @@ public class QuestionaryService implements IDao {
         String sql = "SELECT * FROM Questionary WHERE QuestionaryID = :id";
 
         Session session = sessionUtil.getSession();
-        Query query = session.createNativeQuery(sql).addEntity(Questionary.class);
+        Query query = session.createNativeQuery(sql).addEntity(Questionnaire.class);
         query.setParameter("QuestionaryID", id);
 
-        Questionary questionary= (Questionary) query.getSingleResult();
+        Questionnaire questionnaire = (Questionnaire) query.getSingleResult();
 
         sessionUtil.closeTransactionSesstion();
 
-        return questionary;
+        return questionnaire;
     }
 
     @Override
