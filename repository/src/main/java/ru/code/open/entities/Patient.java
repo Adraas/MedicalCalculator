@@ -1,5 +1,5 @@
 package ru.code.open.entities;
 
 public class Patient {
-    //TODO ORM
+    // TODO: add attributes with ORM configuration
 }
