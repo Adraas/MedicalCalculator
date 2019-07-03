@@ -1,6 +1,6 @@
 package ru.code.open.dao;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface IDao<Entity> {
 
@@ -12,5 +12,5 @@ public interface IDao<Entity> {
 
     void remove(Entity entity);
 
-    List<Entity> getAll(String tableName);
+    Collection<Entity> getAll(String tableName);
 }

@@ -1,16 +1,11 @@
 package ru.code.open.dao;
 
-import java.util.List;
+import java.util.Collection;
 
 public abstract class Dao<Entity> implements IDao<Entity> {
+
     @Override
     public void add(Entity o) {
-
-    }
-
-    @Override
-    public List<Entity> getAll(String tableName) {
-        return null;
     }
 
     @Override
@@ -20,11 +15,14 @@ public abstract class Dao<Entity> implements IDao<Entity> {
 
     @Override
     public void update(Entity o) {
-
     }
 
     @Override
     public void remove(Entity o) {
+    }
 
+    @Override
+    public Collection<Entity> getAll(String tableName) {
+        return null;
     }
 }
