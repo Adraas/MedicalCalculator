@@ -9,66 +9,69 @@ import org.hibernate.query.Query;
 import java.sql.SQLException;
 import java.util.List;
 
-public class QuestionaryService extends SessionUtil implements IDao {
+public class QuestionaryService implements IDao {
+
+    SessionUtil sessionUtil = new SessionUtil();
+
     @Override
     public void add(Object o) throws SQLException {
-        openTransactionSession();
+        sessionUtil.openTransactionSession();
 
-        Session session = getSession();
+        Session session = sessionUtil.getSession();
         session.save(o);
 
-        closeTransactionSesstion();
+        sessionUtil.closeTransactionSesstion();
     }
 
     @Override
     public List getAll() throws SQLException {
-        openTransactionSession();
+        sessionUtil.openTransactionSession();
 
         String sql = "SELECT * FROM Questionary";
 
-        Session session = getSession();
+        Session session = sessionUtil.getSession();
         Query query = session.createNativeQuery(sql).addEntity(Questionary.class);
         List<Questionary> questionaryList = query.list();
 
-        closeTransactionSesstion();
+        sessionUtil.closeTransactionSesstion();
 
         return questionaryList;
     }
 
     @Override
     public Object getById(String id) throws SQLException {
-        openTransactionSession();
+        sessionUtil.openTransactionSession();
 
         String sql = "SELECT * FROM Questionary WHERE QuestionaryID = :id";
 
-        Session session = getSession();
+        Session session = sessionUtil.getSession();
         Query query = session.createNativeQuery(sql).addEntity(Questionary.class);
         query.setParameter("QuestionaryID", id);
 
         Questionary questionary= (Questionary) query.getSingleResult();
 
-        closeTransactionSesstion();
+        sessionUtil.closeTransactionSesstion();
 
         return questionary;
     }
 
     @Override
     public void update(Object o) throws SQLException {
-        openTransactionSession();
+        sessionUtil.openTransactionSession();
 
-        Session session = getSession();
+        Session session = sessionUtil.getSession();
         session.update(o);
 
-        closeTransactionSesstion();
+        sessionUtil.closeTransactionSesstion();
     }
 
     @Override
     public void remove(Object o) throws SQLException {
-        openTransactionSession();
+        sessionUtil.openTransactionSession();
 
-        Session session = getSession();
+        Session session = sessionUtil.getSession();
         session.remove(o);
 
-        closeTransactionSesstion();
+        sessionUtil.closeTransactionSesstion();
     }
 }
