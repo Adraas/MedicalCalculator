@@ -55,6 +55,7 @@
 
     <modules>
         <module>repository</module>
+        <module>questionnaire-calculator</module>
     </modules>
 
     <dependencies>
