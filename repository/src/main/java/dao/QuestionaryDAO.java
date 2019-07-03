@@ -3,7 +3,7 @@ package dao;
 import java.sql.SQLException;
 import java.util.List;
 
-public class QuestionaryDAO extends DAO{
+public class QuestionaryDAO extends Dao {
     @Override
     public void add(Object o) throws SQLException {
 

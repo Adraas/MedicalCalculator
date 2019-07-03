@@ -1,7 +1,7 @@
 package service;
 
 import util.SessionUtil;
-import dao.IDAO;
+import dao.IDao;
 import entities.Questionary;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -9,7 +9,7 @@ import org.hibernate.query.Query;
 import java.sql.SQLException;
 import java.util.List;
 
-public class QuestionaryService extends SessionUtil implements IDAO {
+public class QuestionaryService extends SessionUtil implements IDao {
     @Override
     public void add(Object o) throws SQLException {
         openTransactionSession();

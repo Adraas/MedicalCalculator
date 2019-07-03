@@ -3,7 +3,7 @@ package dao;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IDAO<Entity> {
+public interface IDao<Entity> {
 
     /**create*/
     void add(Entity entity) throws SQLException;
