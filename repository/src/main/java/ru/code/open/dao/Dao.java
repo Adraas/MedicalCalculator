@@ -9,7 +9,7 @@ public abstract class Dao<Entity> implements IDao<Entity> {
     }
 
     @Override
-    public List getAll() {
+    public List<Entity> getAll(String tableName) {
         return null;
     }
 
