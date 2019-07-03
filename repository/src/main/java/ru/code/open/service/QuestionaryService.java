@@ -1,8 +1,8 @@
-package service;
+package ru.code.open.service;
 
 import util.SessionUtil;
-import dao.IDao;
-import entities.Questionary;
+import ru.code.open.dao.IDao;
+import ru.code.open.entities.Questionary;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
