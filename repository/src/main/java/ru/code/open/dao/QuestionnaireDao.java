@@ -1,4 +1,6 @@
 package ru.code.open.dao;
 
-public class QuestionnaireDao extends Dao {
+import ru.code.open.entities.Questionnaire;
+
+public class QuestionnaireDao extends Dao<Questionnaire> {
 }

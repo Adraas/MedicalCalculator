@@ -1,4 +1,6 @@
 package ru.code.open.dao;
 
-public class PatientDao extends Dao {
+import ru.code.open.entities.Patient;
+
+public class PatientDao extends Dao<Patient> {
 }
