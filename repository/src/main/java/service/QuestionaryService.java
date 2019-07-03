@@ -6,7 +6,6 @@ import entities.Questionary;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class QuestionaryService implements IDao {

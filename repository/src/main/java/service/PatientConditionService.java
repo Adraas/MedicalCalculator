@@ -1,14 +1,15 @@
 package service;
 
-import util.SessionUtil;
 import dao.IDao;
 import entities.Patient;
+import entities.PatientCondition;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import util.SessionUtil;
 
 import java.util.List;
 
-public class PatientService implements IDao {
+public class PatientConditionService implements IDao {
 
     SessionUtil sessionUtil = new SessionUtil();
 
@@ -26,10 +27,10 @@ public class PatientService implements IDao {
     public List getAll() {
         sessionUtil.openTransactionSession();
 
-        String sql = "SELECT * FROM Patient";
+        String sql = "SELECT * FROM PatientCondition";
 
         Session session = sessionUtil.getSession();
-        Query query = session.createNativeQuery(sql).addEntity(Patient.class);
+        Query query = session.createNativeQuery(sql).addEntity(PatientCondition.class);
         List<Patient> patientList = query.list();
 
         sessionUtil.closeTransactionSesstion();
@@ -41,17 +42,17 @@ public class PatientService implements IDao {
     public Object getById(String id) {
         sessionUtil.openTransactionSession();
 
-        String sql = "SELECT * FROM Patient WHERE PatientID = :id";
+        String sql = "SELECT * FROM PatientCondition WHERE PatientConditionID = :id";
 
         Session session = sessionUtil.getSession();
-        Query query = session.createNativeQuery(sql).addEntity(Patient.class);
-        query.setParameter("PatientID", id);
+        Query query = session.createNativeQuery(sql).addEntity(PatientCondition.class);
+        query.setParameter("PatientConditionID", id);
 
-        Patient patient= (Patient) query.getSingleResult();
+        PatientCondition patientCondition = (PatientCondition) query.getSingleResult();
 
         sessionUtil.closeTransactionSesstion();
 
-        return patient;
+        return patientCondition;
     }
 
     @Override
