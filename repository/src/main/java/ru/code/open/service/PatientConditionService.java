@@ -1,8 +1,8 @@
-package service;
+package ru.code.open.service;
 
-import dao.IDao;
-import entities.Patient;
-import entities.PatientCondition;
+import ru.code.open.dao.IDao;
+import ru.code.open.entities.Patient;
+import ru.code.open.entities.PatientCondition;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import util.SessionUtil;

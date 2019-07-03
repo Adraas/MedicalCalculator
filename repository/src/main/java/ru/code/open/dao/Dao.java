@@ -1,4 +1,4 @@
-package dao;
+package ru.code.open.dao;
 
 import java.util.List;
 
