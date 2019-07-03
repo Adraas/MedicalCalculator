@@ -1,21 +1,20 @@
 package dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface IDao<Entity> {
 
-    /**create*/
-    void add(Entity entity) throws SQLException;
+    //create
+    void add(Entity entity);
 
-    /**read*/
-    List<Entity> getAll() throws SQLException;
+    //read
+    List<Entity> getAll();
 
-    Entity getById(String id) throws SQLException;
+    Entity getById(String id);
 
-    /**update*/
-    void update(Entity entity) throws SQLException;
+    //update
+    void update(Entity entity);
 
-    /**delete*/
-    void remove(Entity entity) throws SQLException;
+    //delete
+    void remove(Entity entity);
 }

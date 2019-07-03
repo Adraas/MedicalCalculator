@@ -14,7 +14,7 @@ public class PatientService implements IDao {
     SessionUtil sessionUtil = new SessionUtil();
 
     @Override
-    public void add(Object o) throws SQLException {
+    public void add(Object o) {
         sessionUtil.openTransactionSession();
 
         Session session = sessionUtil.getSession();
@@ -24,7 +24,7 @@ public class PatientService implements IDao {
     }
 
     @Override
-    public List getAll() throws SQLException {
+    public List getAll() {
         sessionUtil.openTransactionSession();
 
         String sql = "SELECT * FROM Patient";
@@ -39,7 +39,7 @@ public class PatientService implements IDao {
     }
 
     @Override
-    public Object getById(String id) throws SQLException {
+    public Object getById(String id) {
         sessionUtil.openTransactionSession();
 
         String sql = "SELECT * FROM Patient WHERE PatientID = :id";
@@ -56,7 +56,7 @@ public class PatientService implements IDao {
     }
 
     @Override
-    public void update(Object o) throws SQLException {
+    public void update(Object o) {
         sessionUtil.openTransactionSession();
 
         Session session = sessionUtil.getSession();
@@ -66,7 +66,7 @@ public class PatientService implements IDao {
     }
 
     @Override
-    public void remove(Object o) throws SQLException {
+    public void remove(Object o) {
         sessionUtil.openTransactionSession();
 
         Session session = sessionUtil.getSession();
