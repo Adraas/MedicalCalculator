@@ -44,4 +44,12 @@ public abstract class Dao<Entity, Key extends Serializable> implements IDao<Enti
         session.save(entity);
         transaction.commit();
     }
+
+    @Override
+    public Collection<Entity> getAll(String tableName) {
+        Transaction transaction = session.getTransaction();
+        Collection<Entity> entityList = session.createNativeQuery("SELECT * FROM".concat(tableName)).list();
+        transaction.commit();
+        return entityList;
+    }
 }
