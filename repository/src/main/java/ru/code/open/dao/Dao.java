@@ -1,50 +1,53 @@
 package ru.code.open.dao;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import java.util.List;
+import java.util.Collection;
 
 public abstract class Dao<Entity> implements IDao<Entity> {
-    util.SessionUtil sessionUtil = new util.SessionUtil();
+    Class<Entity> entity;
+    Session session;
 
-    @Override
-    public void add(Entity entity) {
-        sessionUtil.openTransactionSession();
-
-        Session session = sessionUtil.getSession();
-        session.save(entity);
-
-        sessionUtil.closeTransactionSesstion();
+    public Dao(Class<Entity> entity, Session session){
+        this.entity = entity;
+        this.session = session;
     }
 
     @Override
-    public List getAll(String tableName) {
-        List<Entity> entityList = (List<Entity>)  util.HibernateUtil.getSessionFactory().openSession().createQuery(tableName).list();
+    public void add(Entity entity) {
+        Transaction transaction = session.getTransaction();
+        session.save(entity);
+        transaction.commit();
+    }
+
+    @Override
+    public Collection<Entity> getAll(String tableName) {
+        Transaction transaction = session.getTransaction();
+        Collection<Entity> entityList = session.createQuery("SELECT * FROM".concat(tableName)).list();
+        transaction.commit();
         return entityList;
     }
 
     @Override
     public Entity getById(String id) {
-        return util.HibernateUtil.getSessionFactory().openSession().get(Entity.class, id);
+        Transaction transaction = session.getTransaction();
+        Entity entityClass= (Entity) session.get(entity.getClass(), id);
+        transaction.commit();
+        return entityClass;
     }
 
     @Override
     public void update(Entity entity) {
-        sessionUtil.openTransactionSession();
-
-        Session session = sessionUtil.getSession();
-        session.update(entity);
-
-        sessionUtil.closeTransactionSesstion();
+        Transaction transaction = session.getTransaction();
+        session.save(entity);
+        transaction.commit();
     }
 
     @Override
     public void remove(Entity entity) {
-        sessionUtil.openTransactionSession();
-
-        Session session = sessionUtil.getSession();
-        session.remove(entity);
-
-        sessionUtil.closeTransactionSesstion();
+        Transaction transaction = session.getTransaction();
+        session.save(entity);
+        transaction.commit();
     }
 }
