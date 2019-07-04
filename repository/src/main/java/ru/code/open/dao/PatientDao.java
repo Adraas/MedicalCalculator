@@ -1,6 +1,10 @@
 package ru.code.open.dao;
 
-import ru.code.open.entities.Patient;
 
-public class PatientDao extends Dao<Patient> {
+import javax.persistence.Entity;
+import java.security.Key;
+
+public class PatientDao extends Dao<Entity, Key> {
+    public PatientDao() {
+    }
 }

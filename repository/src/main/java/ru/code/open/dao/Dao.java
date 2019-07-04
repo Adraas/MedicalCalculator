@@ -26,9 +26,7 @@ public abstract class Dao<Entity, Key extends Serializable> implements IDao<Enti
 
     @Override
     public Entity getById(Key id) {
-        Transaction transaction = session.getTransaction();
         Entity entityClass = session.get(entity, id);
-        transaction.commit();
         return entityClass;
     }
 
@@ -49,11 +47,9 @@ public abstract class Dao<Entity, Key extends Serializable> implements IDao<Enti
     @SuppressWarnings(value = {"unchecked"})
     @Override
     public Collection<Entity> getAll(String tableName) {
-        Transaction transaction = session.getTransaction();
         NativeQuery<Entity> nativeQuery = session.createNativeQuery("SELECT * FROM :tableName");
         nativeQuery.setParameter("tableName", tableName);
         Collection<Entity> entityList = nativeQuery.list();
-        transaction.commit();
         return entityList;
     }
 }
