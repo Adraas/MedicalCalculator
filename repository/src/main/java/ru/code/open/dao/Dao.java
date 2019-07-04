@@ -6,8 +6,9 @@ import org.hibernate.Transaction;
 import java.util.Collection;
 
 public abstract class Dao<Entity> implements IDao<Entity> {
-    Class<Entity> entity;
-    Session session;
+
+    private Class<Entity> entity;
+    private Session session;
 
     public Dao(Class<Entity> entity, Session session){
         this.entity = entity;
