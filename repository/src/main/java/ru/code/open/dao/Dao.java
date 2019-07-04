@@ -3,9 +3,10 @@ package ru.code.open.dao;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public abstract class Dao<Entity> implements IDao<Entity> {
+public abstract class Dao<Entity, Key extends Serializable> implements IDao<Entity, Key> {
 
     private Class<Entity> entity;
     private Session session;
@@ -23,15 +24,7 @@ public abstract class Dao<Entity> implements IDao<Entity> {
     }
 
     @Override
-    public Collection<Entity> getAll(String tableName) {
-        Transaction transaction = session.getTransaction();
-        Collection<Entity> entityList = session.createQuery("SELECT * FROM".concat(tableName)).list();
-        transaction.commit();
-        return entityList;
-    }
-
-    @Override
-    public Entity getById(String id) {
+    public Entity getById(Key id) {
         Transaction transaction = session.getTransaction();
         Entity entityClass= (Entity) session.get(entity.getClass(), id);
         transaction.commit();
