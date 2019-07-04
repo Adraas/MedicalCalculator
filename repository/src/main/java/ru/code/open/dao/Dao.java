@@ -2,6 +2,7 @@ package ru.code.open.dao;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -45,10 +46,13 @@ public abstract class Dao<Entity, Key extends Serializable> implements IDao<Enti
         transaction.commit();
     }
 
+    @SuppressWarnings(value = {"unchecked"})
     @Override
     public Collection<Entity> getAll(String tableName) {
         Transaction transaction = session.getTransaction();
-        Collection<Entity> entityList = session.createNativeQuery("SELECT * FROM".concat(tableName)).list();
+        NativeQuery<Entity> nativeQuery = session.createNativeQuery("SELECT * FROM :tableName");
+        nativeQuery.setParameter("tableName", tableName);
+        Collection<Entity> entityList = nativeQuery.list();
         transaction.commit();
         return entityList;
     }
