@@ -1,12 +1,13 @@
 package ru.code.open.dao;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public interface IDao<Entity> {
+public interface IDao<Entity, Key extends Serializable> {
 
     void add(Entity entity);
 
-    Entity getById(String id);
+    Entity getById(Key id);
 
     void update(Entity entity);
 
