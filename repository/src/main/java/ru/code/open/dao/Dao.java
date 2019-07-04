@@ -1,5 +1,8 @@
 package ru.code.open.dao;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
@@ -7,15 +10,12 @@ import org.hibernate.query.NativeQuery;
 import java.io.Serializable;
 import java.util.Collection;
 
+@AllArgsConstructor
+@Getter(value = AccessLevel.PROTECTED)
 public abstract class Dao<Entity, Key extends Serializable> implements IDao<Entity, Key> {
 
     private Class<Entity> entity;
     private Session session;
-
-    public Dao(Class<Entity> entity, Session session){
-        this.entity = entity;
-        this.session = session;
-    }
 
     @Override
     public void add(Entity entity) {
