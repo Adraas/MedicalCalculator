@@ -1,10 +1,11 @@
 package ru.code.open.dao;
 
+import org.hibernate.Session;
+import ru.code.open.entities.Patient;
 
-import javax.persistence.Entity;
-import java.security.Key;
+public class PatientDao extends Dao<Patient, Long> {
 
-public class PatientDao extends Dao<Entity, Key> {
-    public PatientDao() {
+    public PatientDao(Class<Patient> entity, Session session) {
+        super(entity, session);
     }
 }
