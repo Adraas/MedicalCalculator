@@ -27,7 +27,7 @@ public abstract class Dao<Entity, Key extends Serializable> implements IDao<Enti
     @Override
     public Entity getById(Key id) {
         Transaction transaction = session.getTransaction();
-        Entity entityClass= (Entity) session.get(entity.getClass(), id);
+        Entity entityClass = session.get(entity, id);
         transaction.commit();
         return entityClass;
     }
