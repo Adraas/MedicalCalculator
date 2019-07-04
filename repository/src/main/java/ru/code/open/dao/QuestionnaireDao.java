@@ -1,9 +1,11 @@
 package ru.code.open.dao;
 
-import javax.persistence.Entity;
-import java.security.Key;
+import org.hibernate.Session;
+import ru.code.open.entities.Questionnaire;
 
-public class QuestionnaireDao extends Dao<Entity, Key> {
-    public QuestionnaireDao() {
+public class QuestionnaireDao extends Dao<Questionnaire, Long> {
+
+    public QuestionnaireDao(Class<Questionnaire> entity, Session session) {
+        super(entity, session);
     }
 }
