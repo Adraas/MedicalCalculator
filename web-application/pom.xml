@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>web-application</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>Web Medical Calculator Control</name>
     <description>The module with a web part (views and controllers)</description>
