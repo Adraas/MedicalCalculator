@@ -3,24 +3,26 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
-
     <persistence-unit name="h2_entity_manager" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>ru.code.open.entities.Patient</class>
+        <class>ru.code.open.entities.PatientCondition</class>
+        <class>ru.code.open.entities.Questionnaire</class>
+
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 
         <properties>
-            <property name="hibernate.connection.provider_class" value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
+            <property name="javax.persistence.jdbc.user" value="medical"/>
+            <property name="javax.persistence.jdbc.password" value="calculator"/>
 
-            <property name="hibernate.hikari.maximumPoolSize" value="6"/>
-            <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
-            <property name="hibernate.connection.username" value="user"/>
-            <property name="hibernate.connection.password" value=""/>
-            <property name="hibernate.connection.url" value="jdbc:h2:~/medical-calculator"/>
-
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
 
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hikari.dataSourceClassName" value="org.h2.jdbcx.JdbcDataSource"/>
+            <property name="hibernate.hikari.dataSource.url" value="jdbc:h2:tcp://localhost/~/medical-calculator"/>
+            <property name="hibernate.hikari.maximumPoolSize" value="6"/>
         </properties>
     </persistence-unit>
 </persistence>
