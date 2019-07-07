@@ -21,11 +21,12 @@ public abstract class Dao<Entity, Key extends Serializable> implements IDao<Enti
 
     @Override
     public void add(Entity entity) throws PersistenceException {
+        Transaction transaction = session.getTransaction();
         try {
-            Transaction transaction = session.getTransaction();
             session.save(entity);
             transaction.commit();
         } catch (IllegalStateException | RollbackException e) {
+            transaction.rollback();
             throw new PersistenceException(e.getMessage(), e);
         }
     }
@@ -37,22 +38,24 @@ public abstract class Dao<Entity, Key extends Serializable> implements IDao<Enti
 
     @Override
     public void update(Entity entity) throws PersistenceException {
+        Transaction transaction = session.getTransaction();
         try {
-            Transaction transaction = session.getTransaction();
             session.update(entity);
             transaction.commit();
         } catch (IllegalStateException | RollbackException e) {
+            transaction.rollback();
             throw new PersistenceException(e.getMessage(), e);
         }
     }
 
     @Override
     public void remove(Entity entity) throws PersistenceException {
+        Transaction transaction = session.getTransaction();
         try {
-            Transaction transaction = session.getTransaction();
             session.remove(entity);
             transaction.commit();
         } catch (IllegalStateException | RollbackException e) {
+            transaction.rollback();
             throw new PersistenceException(e.getMessage(), e);
         }
     }
