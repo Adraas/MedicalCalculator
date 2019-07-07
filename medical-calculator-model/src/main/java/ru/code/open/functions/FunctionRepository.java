@@ -20,4 +20,38 @@ public class FunctionRepository {
         }
         return resultSet;
     }
+
+    public static void addFunctionForGivenCalculator(String calculatorTitle, Function<Double, Double> function) {
+        if (!isContains(calculatorTitle, function)) {
+            ImmutablePair<Set<String>, Function<Double, Double>> immutablePair = getImmutablePair(function);
+            if (immutablePair == null) {
+                Set<String> calculatorTitles = new HashSet<>();
+                calculatorTitles.add(calculatorTitle);
+                functions.add(new ImmutablePair<>(calculatorTitles, function));
+            } else {
+                functions.remove(immutablePair);
+                immutablePair.getCField().add(calculatorTitle);
+                functions.add(immutablePair);
+            }
+        }
+    }
+
+    private static boolean isContains(String calculatorTitle, Function<Double, Double> function) {
+        for (ImmutablePair<Set<String>, Function<Double, Double>> currentPair : functions) {
+            if (currentPair.getFField().equals(function) && currentPair.getCField().contains(calculatorTitle)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static ImmutablePair<Set<String>, Function<Double, Double>> getImmutablePair(Function<Double, Double>
+                                                                                                 function) {
+        for (ImmutablePair<Set<String>, Function<Double, Double>> currentPair : functions) {
+            if (currentPair.getFField().equals(function)) {
+                return currentPair;
+            }
+        }
+        return null;
+    }
 }
