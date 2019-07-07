@@ -6,7 +6,9 @@ import lombok.Getter;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
+import ru.code.open.exceptions.PersistenceException;
 
+import javax.persistence.RollbackException;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -32,14 +34,14 @@ public abstract class Dao<Entity, Key extends Serializable> implements IDao<Enti
     @Override
     public void update(Entity entity) {
         Transaction transaction = session.getTransaction();
-        session.save(entity);
+        session.update(entity);
         transaction.commit();
     }
 
     @Override
     public void remove(Entity entity) {
         Transaction transaction = session.getTransaction();
-        session.save(entity);
+        session.remove(entity);
         transaction.commit();
     }
 
