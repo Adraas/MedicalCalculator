@@ -20,10 +20,14 @@ public abstract class Dao<Entity, Key extends Serializable> implements IDao<Enti
     private Session session;
 
     @Override
-    public void add(Entity entity) {
-        Transaction transaction = session.getTransaction();
-        session.save(entity);
-        transaction.commit();
+    public void add(Entity entity) throws PersistenceException {
+        try {
+            Transaction transaction = session.getTransaction();
+            session.save(entity);
+            transaction.commit();
+        } catch (IllegalStateException | RollbackException e) {
+            throw new PersistenceException(e.getMessage(), e);
+        }
     }
 
     @Override
@@ -32,17 +36,25 @@ public abstract class Dao<Entity, Key extends Serializable> implements IDao<Enti
     }
 
     @Override
-    public void update(Entity entity) {
-        Transaction transaction = session.getTransaction();
-        session.update(entity);
-        transaction.commit();
+    public void update(Entity entity) throws PersistenceException {
+        try {
+            Transaction transaction = session.getTransaction();
+            session.update(entity);
+            transaction.commit();
+        } catch (IllegalStateException | RollbackException e) {
+            throw new PersistenceException(e.getMessage(), e);
+        }
     }
 
     @Override
-    public void remove(Entity entity) {
-        Transaction transaction = session.getTransaction();
-        session.remove(entity);
-        transaction.commit();
+    public void remove(Entity entity) throws PersistenceException {
+        try {
+            Transaction transaction = session.getTransaction();
+            session.remove(entity);
+            transaction.commit();
+        } catch (IllegalStateException | RollbackException e) {
+            throw new PersistenceException(e.getMessage(), e);
+        }
     }
 
     @SuppressWarnings(value = {"unchecked"})
