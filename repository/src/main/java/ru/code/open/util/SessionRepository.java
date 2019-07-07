@@ -27,6 +27,11 @@ public class SessionRepository {
         if (!sessionMap.containsKey(persistenceUnitName)) {
             addSession(persistenceUnitName);
         }
-        return sessionMap.get(persistenceUnitName);
+        Session session = sessionMap.get(persistenceUnitName);
+        if (!(session.isOpen() && session.isConnected())) {
+            sessionMap.remove(persistenceUnitName);
+            return getSession(persistenceUnitName);
+        }
+        return session;
     }
 }
