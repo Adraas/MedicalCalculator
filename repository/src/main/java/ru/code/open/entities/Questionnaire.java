@@ -1,5 +1,6 @@
 package ru.code.open.entities;
 
+import lombok.Data;
 import ru.code.open.embeddables.Question;
 
 import javax.persistence.Entity;
@@ -7,36 +8,21 @@ import javax.persistence.*;
 import javax.persistence.Table;
 import java.util.Collection;
 
+@Data
 @Entity
-@Table(name="questionnaire")
+@Table(name = "questionnaire")
 public class Questionnaire {
-    public Questionnaire () {}
-
-
-    @Column(name = "patientId")
-    private long id;
-    @Column(name = "Title")
-    private String title;
-    @Column(name = "Question")
-    private Collection <Question> questions;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    public Long getId() { return id; }
-
-    public void setId(Long id) { this.id = id; }
-
-    public String getTitle() { return title;}
-
-    public void setTitle(String title) { this.title = title; }
-
-    private Collection<Question> getQuestions() { return questions;}
-
-    public void setQuestions(Collection<Question> questions) { this.questions = questions; }
-
-    @Override
-    public String toString(){
-        return "Questionnaire{ " + "id = " + id + ", title = '" + title + '\'' + ", question = '" + getQuestions() + '\'' + '}';
-    }
+    @Column(name = "patient_id", unique = true)
+    private long id;
+    @Column(name = "Title", nullable = false)
+    private String title;
+    @Column(name = "question", nullable = false)
+    @OneToMany(mappedBy = "questionnaire", cascade=CascadeType.ALL, orphanRemoval=true)
+    private Collection<Question> questions;
+    @OneToMany(mappedBy = "questionnaire", cascade=CascadeType.ALL, orphanRemoval=true)
+    private Collection<PatientCondition> patientCondition;
 
 }

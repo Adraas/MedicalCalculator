@@ -1,20 +1,20 @@
 package ru.code.open.embeddables;
 
+import lombok.Data;
+
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Table;
 import java.util.Map;
 
+@Data
 @Embeddable
+@Table(name = "answer")
 public class Answer {
-    public Answer (){}
 
+    @Column(name = "answer", nullable = false)
     private String answerWording;
-    private Map<String,Long> criteria;
+    @Column(name = "criteria", nullable = false)
+    private Map<String, Long> criteria;
 
-    public Map<String,Long> getCriteria() { return criteria; }
-
-    public void setCriteria (Map<String,Long> criteria) { this.criteria = criteria;}
-
-    public String getAnswerWording() { return answerWording;}
-
-    public void setAnswerWording(String answerWording) { this.answerWording = answerWording; }
 }

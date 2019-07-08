@@ -1,48 +1,29 @@
 package ru.code.open.entities;
+
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 
+@Data
 @Entity
-@Table(name="patient")
+@Table(name = "patient")
 public class Patient {
-    public Patient () {}
-
-
-    @Column(name = "patientId")
-    private Long id;
-    @Column(name = "patientName")
-    private String name;
-    @Column(name = "patientSurname")
-    private String surname;
-    @Column(name = "patientPatronymic")
-    private String patronymic;
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "patient_id", unique = true)
+    private Long id;
+    @Column(name = "patient_name", length = 30, nullable = false)
+    private String name;
+    @Column(name = "patient_surname", length = 30, nullable = false)
+    private String surname;
+    @Column(name = "patient_patronymic", length = 30, nullable = true)
+    private String patronymic;
     @OneToMany(mappedBy = "patient", cascade=CascadeType.ALL, orphanRemoval=true)
-    public Long getId() { return id; }
+    private Collection<PatientCondition> patientCondition;
 
-    public void setId(Long id) { this.id = id; }
-
-    public String getName() { return name;}
-
-    public void setName(String name) { this.name = name; }
-
-    public String getSurname() { return surname; }
-
-    public void setSurname(String surname) { this.surname = surname; }
-
-    public String getPatronymic() { return patronymic; }
-
-    public void setPatronymic(String patronymic) { this.patronymic = patronymic; }
-
-    @Override
-    public String toString(){
-        return "Patinent{ " + "id = " + id + ", name = '" + name + '\'' + ", surname = '" + surname + '\'' + ", patronymic = '" + patronymic + '\'' + '}';
-    }
 }

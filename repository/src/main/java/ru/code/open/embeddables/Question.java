@@ -1,21 +1,18 @@
 package ru.code.open.embeddables;
 
-import javax.persistence.Embeddable;
+import lombok.Data;
+
+import javax.persistence.*;
 import java.util.Collection;
 
+@Data
 @Embeddable
+@Table(name = "question")
 public class Question {
-    public Question (){}
 
+    @Column(name = "question", nullable = false)
     private String questionWording;
-    private Collection<Answer> answers;
-
-    public String getQuestionWording() { return questionWording;}
-
-    public void setQuestionWording(String questionWording) { this.questionWording = questionWording; }
-
-    public Collection<Answer> getAnswers() { return answers;}
-
-    public void setAnswers(Collection<Answer> answers) { this.answers = answers; }
-
+    @Column(name = "answer", nullable = false)
+    @OneToMany(mappedBy = "question", cascade= CascadeType.ALL, orphanRemoval=true)
+    private Collection <Answer> answers;
 }
