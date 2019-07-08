@@ -21,6 +21,6 @@ public class PatientCondition {
     @Column(name = "patient_condition", nullable = false)
     private String condition;
     @Column(name = "description", nullable = false)
-    private String descriprion;
+    private String description;
 
 }
