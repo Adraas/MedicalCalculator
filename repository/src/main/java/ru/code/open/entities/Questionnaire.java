@@ -25,9 +25,9 @@ public class Questionnaire {
     @Column(name = "Title", nullable = false)
     private String title;
     @Column(name = "question", nullable = false)
-    @OneToMany(mappedBy = "questionnaire", cascade=CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy = "questionnaire", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Question> questions;
-    @OneToMany(mappedBy = "questionnaire", cascade=CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy = "questionnaire", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<PatientCondition> patientCondition;
 
 }

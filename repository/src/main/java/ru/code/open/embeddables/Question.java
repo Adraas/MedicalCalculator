@@ -17,7 +17,7 @@ public class Question {
     @Column(name = "question", nullable = false)
     private String questionWording;
     @Column(name = "answer", nullable = false)
-    @OneToMany(mappedBy = "question", cascade= CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection <Answer> answers;
 
 }
