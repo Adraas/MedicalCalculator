@@ -2,6 +2,8 @@ package ru.code.open;
 
 import lombok.Getter;
 import ru.code.open.service.IService;
+import ru.code.open.service.factory.IServiceFactory;
+import ru.code.open.service.factory.ServiceFactory;
 import ru.code.open.util.DaoRepository;
 
 public class RepositoryFacade {
