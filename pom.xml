@@ -55,7 +55,7 @@
 
     <modules>
         <module>repository</module>
-        <module>questionnaire-calculator</module>
+        <module>medical-calculator-model</module>
         <module>web-application</module>
     </modules>
 
