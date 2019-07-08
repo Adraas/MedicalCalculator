@@ -1,7 +1,5 @@
 package ru.code.open.functions;
 
-import lombok.Getter;
-
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -9,7 +7,6 @@ import java.util.function.Function;
 
 public class FunctionRepository {
 
-    @Getter
     private static Set<ImmutablePair<Set<String>, Function<Map<String, Double>, Double>>> functions;
 
     public static Set<Function<Map<String, Double>, Double>> getFunctionsForGivenCalculator(String calculatorTitle) {
