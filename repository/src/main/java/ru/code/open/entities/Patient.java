@@ -2,9 +2,13 @@ package ru.code.open.entities;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Collection;
 
@@ -23,7 +27,7 @@ public class Patient {
     private String surname;
     @Column(name = "patient_patronymic", length = 30, nullable = true)
     private String patronymic;
-    @OneToMany(mappedBy = "patient", cascade=CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy = "patient", cascade= CascadeType.ALL, orphanRemoval=true)
     private Collection<PatientCondition> patientCondition;
 
 }

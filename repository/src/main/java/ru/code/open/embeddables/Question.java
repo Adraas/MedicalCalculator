@@ -2,7 +2,11 @@ package ru.code.open.embeddables;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.Collection;
 
 @Data
@@ -15,4 +19,5 @@ public class Question {
     @Column(name = "answer", nullable = false)
     @OneToMany(mappedBy = "question", cascade= CascadeType.ALL, orphanRemoval=true)
     private Collection <Answer> answers;
+
 }
