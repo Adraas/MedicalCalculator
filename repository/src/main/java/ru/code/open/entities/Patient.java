@@ -27,7 +27,7 @@ public class Patient {
     private String surname;
     @Column(name = "patient_patronymic", length = 30, nullable = true)
     private String patronymic;
-    @OneToMany(mappedBy = "patient", cascade= CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<PatientCondition> patientCondition;
 
 }
