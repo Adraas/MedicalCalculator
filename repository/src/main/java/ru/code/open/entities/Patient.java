@@ -2,9 +2,9 @@ package ru.code.open.entities;
 
 import lombok.Data;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,15 +19,15 @@ public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "patient_id", unique = true)
+    @Column(name = "id", unique = true, nullable = false, insertable = false, updatable = false)
     private Long id;
-    @Column(name = "patient_name", length = 30, nullable = false)
+    @Column(name = "name", length = 30, nullable = false)
     private String name;
-    @Column(name = "patient_surname", length = 30, nullable = false)
+    @Column(name = "surname", length = 30, nullable = false)
     private String surname;
-    @Column(name = "patient_patronymic", length = 30)
+    @Column(name = "patronymic", length = 30)
     private String patronymic;
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER)
     private Collection<PatientCondition> patientCondition;
 
 }
