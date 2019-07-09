@@ -8,13 +8,13 @@ import java.util.Map;
 
 public class MedicalCalculator {
 
-    public Collection<Double> calculate(String calculatorType, Map<String, Double> answers) {
+    public Collection<Double> calculate(String calculatorTitle, String calculatorType, Map<String, Double> answers) {
         MedicalQuestionnaireType type = MedicalQuestionnaireType.valueOf(calculatorType);
         switch (type) {
             case POINTS_SUMMATION_CALCUATOR:
                 return totalScoreCalculate(answers.values());
             case FORMULA_CALCULATOR:
-                return calculateByFormulas(answers);
+                return calculateByFormulas(calculatorTitle, answers);
             default:
                 return null;
         }
@@ -28,7 +28,7 @@ public class MedicalCalculator {
         return Collections.singletonList(score);
     }
 
-    private Collection<Double> calculateByFormulas(Map<String, Double> answers) {
+    private Collection<Double> calculateByFormulas(String calculatorTitle, Map<String, Double> answers) {
         // TODO: add work with formulas
         return null;
     }
