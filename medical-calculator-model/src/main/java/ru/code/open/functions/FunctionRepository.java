@@ -9,6 +9,10 @@ public class FunctionRepository {
 
     private static Set<ImmutablePair<Set<String>, Function<Map<String, Double>, Double>>> functions;
 
+    static {
+        functions = new HashSet<>();
+    }
+
     public static Set<Function<Map<String, Double>, Double>> getFunctionsForGivenCalculator(String calculatorTitle) {
         Set<Function<Map<String, Double>, Double>> resultSet = new HashSet<>();
         for (ImmutablePair<Set<String>, Function<Map<String, Double>, Double>> currentPair : functions) {
