@@ -16,9 +16,9 @@ public class PatientCondition {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "patient_id", unique = true)
+    @Column(name = "id", unique = true, nullable = false, insertable = false, updatable = false)
     private long id;
-    @Column(name = "patient_condition", nullable = false)
+    @Column(name = "condition", nullable = false)
     private String condition;
     @Column(name = "description", nullable = false)
     private String description;
