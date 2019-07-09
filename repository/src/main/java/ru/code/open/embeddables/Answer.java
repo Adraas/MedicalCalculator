@@ -1,6 +1,7 @@
 package ru.code.open.embeddables;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -10,6 +11,7 @@ import javax.persistence.MapKeyColumn;
 import java.util.Map;
 
 @Data
+@NoArgsConstructor
 @Embeddable
 public class Answer {
 
@@ -20,4 +22,8 @@ public class Answer {
     @ElementCollection(fetch = FetchType.EAGER, targetClass = String.class)
     private Map<String, Long> grades;
 
+    public Answer(String answerWording, Map<String, Long> grades) {
+        this.answerWording = answerWording;
+        this.grades = grades;
+    }
 }

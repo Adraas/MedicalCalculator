@@ -1,6 +1,7 @@
 package ru.code.open.entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.code.open.embeddables.Question;
 
 import javax.persistence.CascadeType;
@@ -18,6 +19,7 @@ import java.util.Collection;
 import static javax.persistence.EnumType.STRING;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "questionnaire")
 public class Questionnaire {
@@ -35,4 +37,12 @@ public class Questionnaire {
     @Column(name = "medical_questionnaire_type", nullable = false)
     @Enumerated(STRING)
     private MedicalQuestionnaireType medicalQuestionnaireType;
+
+    public Questionnaire(String title, Collection<Question> questions, Collection<PatientCondition> patientCondition,
+                         MedicalQuestionnaireType medicalQuestionnaireType) {
+        this.title = title;
+        this.questions = questions;
+        this.patientCondition = patientCondition;
+        this.medicalQuestionnaireType = medicalQuestionnaireType;
+    }
 }

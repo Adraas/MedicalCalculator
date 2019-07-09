@@ -1,6 +1,7 @@
 package ru.code.open.entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 import java.util.Collection;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "patient")
 public class Patient {
@@ -30,4 +32,10 @@ public class Patient {
     @OneToMany(fetch = FetchType.EAGER)
     private Collection<PatientCondition> patientCondition;
 
+    public Patient(String name, String surname, String patronymic, Collection<PatientCondition> patientCondition) {
+        this.name = name;
+        this.surname = surname;
+        this.patronymic = patronymic;
+        this.patientCondition = patientCondition;
+    }
 }
