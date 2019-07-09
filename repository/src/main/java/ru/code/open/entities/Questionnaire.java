@@ -2,7 +2,6 @@ package ru.code.open.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.code.open.embeddables.Question;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
