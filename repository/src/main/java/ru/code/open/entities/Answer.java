@@ -1,4 +1,4 @@
-package ru.code.open.embeddables;
+package ru.code.open.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
