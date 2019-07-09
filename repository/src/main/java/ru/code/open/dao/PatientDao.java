@@ -10,7 +10,7 @@ public class PatientDao extends Dao<Patient, Long> {
         super(entity, session);
     }
 
-    public boolean getPatient(String firstName,String surname, String patronymic) {
+    public boolean getPatient(String firstName, String surname, String patronymic) {
         NativeQuery<Patient> nativeQuery = getSession().createNativeQuery("SELECT * FROM patient WHERE patient_name :firstName AND patient_surname :surname AND patient_patronymic :patronymic");
         nativeQuery.setParameter("firstName", firstName);
         nativeQuery.setParameter("surname", surname);
