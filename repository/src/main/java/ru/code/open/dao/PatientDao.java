@@ -10,8 +10,13 @@ public class PatientDao extends Dao<Patient, Long> {
         super(entity, session);
     }
 
+    @SuppressWarnings(value = {"unchecked"})
     public boolean getPatient(String firstName, String surname, String patronymic) {
-        NativeQuery<Patient> nativeQuery = getSession().createNativeQuery("SELECT * FROM patient WHERE patient_name :firstName AND patient_surname :surname AND patient_patronymic :patronymic");
+        NativeQuery<Patient> nativeQuery = (patronymic != null && !patronymic.trim().equals(""))
+                ? getSession().createNativeQuery("SELECT * FROM patient WHERE patient.name = :firstName AND "
+                .concat("surname = :surname AND patronymic = :patronymic"))
+                : getSession().createNativeQuery("SELECT * FROM patient WHERE patient.name = :firstName AND "
+                .concat("surname = :surname"));
         nativeQuery.setParameter("firstName", firstName);
         nativeQuery.setParameter("surname", surname);
         nativeQuery.setParameter("patronymic", patronymic);
