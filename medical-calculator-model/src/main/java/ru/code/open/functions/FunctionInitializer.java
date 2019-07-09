@@ -37,17 +37,16 @@ public class FunctionInitializer {
             Map<Interval<Integer>, Integer> systolicBloodPressure = MeasureGRACEFunctionUtil.getSystolicBloodPressure();
             Map<Interval<Double>, Integer> serumCreatinine = MeasureGRACEFunctionUtil.getSerumCreatinine();
             Map<String, Integer> heartFailureSeverity = MeasureGRACEFunctionUtil.getHeartFailureSeverity();
-            int ageScore = parametersByNames.get("Возраст").intValue();
+            int ageScore = parametersByNames.get("ageScore").intValue();
             ageScore = age.get(MeasureGRACEFunctionUtil.getInterval(ageScore, age));
-            int heartRateScore = parametersByNames.get("Частота сердечных сокращений").intValue();
+            int heartRateScore = parametersByNames.get("heartRateScore").intValue();
             heartRateScore = heartRate.get(MeasureGRACEFunctionUtil.getInterval(heartRateScore, age));
-            int systolicBloodPressureScore = parametersByNames.get("Систолическое артериальное давление").intValue();
+            int systolicBloodPressureScore = parametersByNames.get("systolicBloodPressureScore").intValue();
             systolicBloodPressureScore = systolicBloodPressure.get(MeasureGRACEFunctionUtil
                     .getInterval(systolicBloodPressureScore, age));
-            int serumCreatinineScore = parametersByNames.get("Креатинин сыворотки крови").intValue();
+            int serumCreatinineScore = parametersByNames.get("serumCreatinineScore").intValue();
             serumCreatinineScore = serumCreatinine.get(MeasureGRACEFunctionUtil.getInterval(serumCreatinineScore, age));
-            byte heartFailureSeverityType = parametersByNames
-                    .get("Тяжесть сердечной недостаточности по классификации Killip").byteValue();
+            byte heartFailureSeverityType = parametersByNames.get("heartFailureSeverityType").byteValue();
             int heartFailureSeverityScore = heartFailureSeverityType == 0
                     ? heartFailureSeverity.get("Кардиогенный шок (IV)")
                     : heartFailureSeverityType == 1
@@ -56,13 +55,10 @@ public class FunctionInitializer {
                     ? heartFailureSeverity
                     .get("Наличие хрипов в легких и/или повышенного давления в югулярных венах (II)")
                     : heartFailureSeverity.get("Отсутствие признаков застойной сердечной недостаточности (I)");
-            byte cardiacArrest = (byte) (parametersByNames.get("Остановка сердца (на момент поступления пациента)")
-                    .byteValue() == 0 ? 39 : 0);
-            byte stSegmentDeviation = (byte) (parametersByNames.get("Отклонение сегмента ST")
-                    .byteValue() == 0 ? 28 : 0);
+            byte cardiacArrest = (byte) (parametersByNames.get("cardiacArrest").byteValue() == 0 ? 39 : 0);
+            byte stSegmentDeviation = (byte) (parametersByNames.get("stSegmentDeviation").byteValue() == 0 ? 28 : 0);
             byte cardiospecificEnzymesLevelIncrease = (byte) (parametersByNames
-                    .get("Наличие диагностически значимого повышения уровня кардиоспецифических ферментов")
-                    .byteValue() == 0 ? 14 : 0);
+                    .get("cardiospecificEnzymesLevelIncrease").byteValue() == 0 ? 14 : 0);
             return (double) (ageScore + heartRateScore + systolicBloodPressureScore + serumCreatinineScore
                     + heartFailureSeverityScore + cardiacArrest + stSegmentDeviation
                     + cardiospecificEnzymesLevelIncrease);
