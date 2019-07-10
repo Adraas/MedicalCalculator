@@ -15,12 +15,12 @@ public class QuestionnaireViewGenerator {
         Questionnaire questionnaire =
                 ((QuestionnaireService) medicalCalculatorFacade.getRepositoryFacade().getService()).getByTitle(title);
         String questionnaireData = "";
-        for (Question question: questionnaire.getQuestions()) {
+        for (Question question : questionnaire.getQuestions()) {
             questionnaireData = questionnaireData.concat(question.getQuestionWording()).concat("<br/><br/>");
-            if(question.getAnswers().isEmpty())
+            if (question.getAnswers().isEmpty())
                 questionnaireData = questionnaireData.concat("<input  type='text' name='answer'  value='' /><br/><br/>");
             else {
-                for (Answer answer: question.getAnswers()) {
+                for (Answer answer : question.getAnswers()) {
                     questionnaireData = questionnaireData.concat(" <input  type='radio' name='answer'/>").concat(answer.getAnswerWording()).concat("<br/><br/>");
                 }
             }
