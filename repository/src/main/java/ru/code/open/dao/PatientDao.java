@@ -23,4 +23,9 @@ public class PatientDao extends Dao<Patient, Long> {
         Patient patient = nativeQuery.getSingleResult();
         return patient != null;
     }
+
+    @Override
+    public String getTableName() {
+        return Entities.PATIENT.getTableName();
+    }
 }
