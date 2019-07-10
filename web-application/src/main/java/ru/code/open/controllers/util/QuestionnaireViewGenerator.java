@@ -14,16 +14,25 @@ public class QuestionnaireViewGenerator {
                 new MedicalCalculatorFacade(new RepositoryFacade("h2_entity_manager", Questionnaire.class));
         Questionnaire questionnaire =
                 ((QuestionnaireService) medicalCalculatorFacade.getRepositoryFacade().getService()).getByTitle(title);
+        byte firstIndex = 0;
+        byte secondIndex = 0;
         String questionnaireData = "<div>";
         for (Question question : questionnaire.getQuestions()) {
             questionnaireData = questionnaireData.concat(question.getQuestionWording()).concat("<br/>");
             if (question.getAnswers().isEmpty())
-                questionnaireData = questionnaireData.concat("<input type='text' name='answer' value=''/><br/><br/>");
+                questionnaireData = questionnaireData.concat("<input type='text' name='answer_")
+                        .concat(String.valueOf(firstIndex)).concat("-").concat(String.valueOf(secondIndex))
+                        .concat("' value=''/><br/><br/>");
             else {
                 for (Answer answer : question.getAnswers()) {
-                    questionnaireData = questionnaireData.concat("<input type='radio' name='answer'/>")
-                            .concat(answer.getAnswerWording()).concat("<br/>");
+                    questionnaireData = questionnaireData.concat("<input type='radio' name='answer_")
+                            .concat(String.valueOf(firstIndex)).concat("-").concat(String.valueOf(secondIndex))
+                            .concat("' value='")
+                            .concat(answer.getAnswerWording()).concat("'/><br/>");
+                    secondIndex++;
                 }
+                firstIndex++;
+                secondIndex = 0;
                 questionnaireData = questionnaireData.concat("<br/>");
             }
         }
