@@ -10,8 +10,8 @@ public class Interval<N extends Number> implements Comparable<Interval<N>> {
     private N rightLimit;
 
     public Interval(N leftLimit, N rightLimit) throws AlgorithmException {
-        if (!(leftLimit.doubleValue() <= rightLimit.doubleValue())) {
-            throw new AlgorithmException("left limit is more than right limit");
+        if (leftLimit.doubleValue() >= rightLimit.doubleValue()) {
+            throw new AlgorithmException("the left limit is greater than or equal to the right");
         }
         this.leftLimit = leftLimit;
         this.rightLimit = rightLimit;
