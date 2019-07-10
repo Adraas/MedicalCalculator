@@ -2,7 +2,7 @@ class MedicalCalculator {
 
     static xmlHttp = new XMLHttpRequest();
 
-    static receiveList(parentNodeId) {
+    static receiveQuestionnaires(parentNodeId) {
         this.xmlHttp.onload = function () {
             let response = MedicalCalculator.xmlHttp.responseText;
             if (response != null && response.trim() !== "") {
