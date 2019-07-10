@@ -27,7 +27,7 @@ public class Questionnaire {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", unique = true, nullable = false, insertable = false, updatable = false)
     private long id;
-    @Column(name = "title", nullable = false, unique = true)
+    @Column(name = "title", unique = true, nullable = false)
     private String title;
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Question> questions;
