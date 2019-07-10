@@ -1,4 +1,4 @@
-package ru.code.open.functions;
+package ru.code.open.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

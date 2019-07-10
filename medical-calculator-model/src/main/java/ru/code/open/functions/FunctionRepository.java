@@ -1,5 +1,7 @@
 package ru.code.open.functions;
 
+import ru.code.open.util.ImmutablePair;
+
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
