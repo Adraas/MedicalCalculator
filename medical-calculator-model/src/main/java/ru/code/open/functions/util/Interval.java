@@ -1,14 +1,21 @@
 package ru.code.open.functions.util;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import ru.code.open.exceptions.AlgorithmException;
 
-@AllArgsConstructor
 @Getter
 public class Interval<N extends Number> implements Comparable<Interval<N>> {
 
     private N leftLimit;
     private N rightLimit;
+
+    public Interval(N leftLimit, N rightLimit) throws AlgorithmException {
+        if (!(leftLimit.doubleValue() <= rightLimit.doubleValue())) {
+            throw new AlgorithmException("left limit is more than right limit");
+        }
+        this.leftLimit = leftLimit;
+        this.rightLimit = rightLimit;
+    }
 
     public boolean contains(N value) {
         return value.doubleValue() >= leftLimit.doubleValue()

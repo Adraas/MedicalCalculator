@@ -1,5 +1,7 @@
 package ru.code.open.functions.util;
 
+import ru.code.open.exceptions.AlgorithmException;
+
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -12,7 +14,7 @@ public class MeasureGRACEFunctionUtil {
     private static Map<Interval<Double>, Integer> serumCreatinine = null;
     private static Map<String, Integer> heartFailureSeverity = null;
 
-    public static Map<Interval<Integer>, Integer> getAge() {
+    public static Map<Interval<Integer>, Integer> getAge() throws AlgorithmException {
         if (age == null) {
             age = new TreeMap<>();
             age.put(new Interval<>(0, 29), 0);
@@ -27,7 +29,7 @@ public class MeasureGRACEFunctionUtil {
         return age;
     }
 
-    public static Map<Interval<Integer>, Integer> getHeartRate() {
+    public static Map<Interval<Integer>, Integer> getHeartRate() throws AlgorithmException {
         if (heartRate == null) {
             heartRate = new TreeMap<>();
             heartRate.put(new Interval<>(0, 49), 0);
@@ -41,7 +43,7 @@ public class MeasureGRACEFunctionUtil {
         return heartRate;
     }
 
-    public static Map<Interval<Integer>, Integer> getSystolicBloodPressure() {
+    public static Map<Interval<Integer>, Integer> getSystolicBloodPressure() throws AlgorithmException {
         if (systolicBloodPressure == null) {
             systolicBloodPressure = new TreeMap<>();
             systolicBloodPressure.put(new Interval<>(0, 79), 58);
@@ -55,7 +57,7 @@ public class MeasureGRACEFunctionUtil {
         return systolicBloodPressure;
     }
 
-    public static Map<Interval<Double>, Integer> getSerumCreatinine() {
+    public static Map<Interval<Double>, Integer> getSerumCreatinine() throws AlgorithmException {
         if (serumCreatinine == null) {
             serumCreatinine = new TreeMap<>();
             serumCreatinine.put(new Interval<>(0d, 35.35), 1);
