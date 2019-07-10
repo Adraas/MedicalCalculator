@@ -1,6 +1,7 @@
 package ru.code.open;
 
 import lombok.Getter;
+import ru.code.open.exceptions.PersistenceException;
 import ru.code.open.service.IService;
 import ru.code.open.service.factory.IServiceFactory;
 import ru.code.open.service.factory.ServiceFactory;
@@ -18,7 +19,7 @@ public class RepositoryFacade {
     private IService service;
 
     @SuppressWarnings(value = {"unchecked"})
-    public RepositoryFacade(String persistenceUnitName, Class entityInstanceClass) {
+    public RepositoryFacade(String persistenceUnitName, Class entityInstanceClass) throws PersistenceException {
         this.persistenceUnitName = persistenceUnitName;
         this.entityInstanceClass = entityInstanceClass;
         serviceFactory = new ServiceFactory();

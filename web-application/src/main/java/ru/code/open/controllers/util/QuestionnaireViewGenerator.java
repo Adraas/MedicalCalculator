@@ -5,11 +5,12 @@ import ru.code.open.RepositoryFacade;
 import ru.code.open.entities.Answer;
 import ru.code.open.entities.Question;
 import ru.code.open.entities.Questionnaire;
+import ru.code.open.exceptions.PersistenceException;
 import ru.code.open.service.QuestionnaireService;
 
 public class QuestionnaireViewGenerator {
 
-    public static String getQuestionnaireData(String title) {
+    public static String getQuestionnaireData(String title) throws PersistenceException {
         MedicalCalculatorFacade medicalCalculatorFacade =
                 new MedicalCalculatorFacade(new RepositoryFacade("h2_entity_manager", Questionnaire.class));
         Questionnaire questionnaire =
