@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,9 +25,12 @@ public class PatientCondition {
     private String condition;
     @Column(name = "description", nullable = false)
     private String description;
+    @Embedded
+    private Interval<Integer> interval;
 
-    public PatientCondition(String condition, String description) {
+    public PatientCondition(String condition, String description, Interval<Integer> interval) {
         this.condition = condition;
         this.description = description;
+        this.interval = interval;
     }
 }
