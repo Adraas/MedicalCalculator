@@ -10,6 +10,7 @@ import ru.code.open.service.PatientService;
 import ru.code.open.service.QuestionnaireService;
 
 public class ServiceFactory implements IServiceFactory {
+
     @Override
     public IService createService(IDao iDao) {
         Class entityClass = iDao.getClass();
