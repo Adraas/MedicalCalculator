@@ -1,10 +1,14 @@
 package ru.code.open.algorithm;
 
 import ru.code.open.entities.MedicalQuestionnaireType;
+import ru.code.open.functions.FunctionRepository;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
 
 public class MedicalCalculator {
 
@@ -29,7 +33,11 @@ public class MedicalCalculator {
     }
 
     private Collection<Double> calculateByFormulas(String calculatorTitle, Map<String, Double> answers) {
-        // TODO: add work with formulas
-        return null;
+        Collection<Double> result = new ArrayList<>();
+        Set<Function<Map<String, Double>, Double>> resultSet = FunctionRepository.getFunctionsForGivenCalculator(calculatorTitle);
+        for (Function<Map<String, Double>, Double> item : resultSet) {
+            result.add(item.apply(answers));
+        }
+        return result;
     }
 }
