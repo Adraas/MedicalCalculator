@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.Collection;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -30,9 +30,9 @@ public class Patient {
     @Column(name = "patronymic", length = 30)
     private String patronymic;
     @OneToMany(fetch = FetchType.EAGER)
-    private Collection<PatientCondition> patientCondition;
+    private Set<PatientCondition> patientCondition;
 
-    public Patient(String name, String surname, String patronymic, Collection<PatientCondition> patientCondition) {
+    public Patient(String name, String surname, String patronymic, Set<PatientCondition> patientCondition) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;

@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.Collection;
+import java.util.Set;
 
 import static javax.persistence.EnumType.STRING;
 
@@ -30,14 +30,14 @@ public class Questionnaire {
     @Column(name = "title", nullable = false)
     private String title;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Collection<Question> questions;
+    private Set<Question> questions;
     @OneToMany(fetch = FetchType.EAGER)
-    private Collection<PatientCondition> patientCondition;
+    private Set<PatientCondition> patientCondition;
     @Column(name = "medical_questionnaire_type", nullable = false)
     @Enumerated(STRING)
     private MedicalQuestionnaireType medicalQuestionnaireType;
 
-    public Questionnaire(String title, Collection<Question> questions, Collection<PatientCondition> patientCondition,
+    public Questionnaire(String title, Set<Question> questions, Set<PatientCondition> patientCondition,
                          MedicalQuestionnaireType medicalQuestionnaireType) {
         this.title = title;
         this.questions = questions;
