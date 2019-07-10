@@ -13,7 +13,7 @@ public class QuestionnaireDao extends Dao<Questionnaire, Long> {
 
     @SuppressWarnings(value = {"unchecked"})
     public Questionnaire getByTitle(String title) {
-        NativeQuery<Questionnaire> nativeQuery = getSession().createNativeQuery("SELECT * FROM questionnaire WHERE tittle = :title");
+        NativeQuery<Questionnaire> nativeQuery = getSession().createNativeQuery("SELECT * FROM questionnaire WHERE title = :title");
         nativeQuery.setParameter("title", title);
         return nativeQuery.getSingleResult();
     }
