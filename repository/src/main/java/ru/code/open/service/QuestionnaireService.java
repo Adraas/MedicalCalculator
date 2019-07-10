@@ -1,13 +1,13 @@
 package ru.code.open.service;
 
-import org.hibernate.Session;
-import org.hibernate.query.NativeQuery;
+import ru.code.open.dao.IDao;
+import ru.code.open.dao.QuestionnaireDao;
 import ru.code.open.entities.Questionnaire;
 
 public class QuestionnaireService extends Service<Questionnaire, Long> {
 
-    public QuestionnaireService(Class<Questionnaire> v, Session session) {
-        super(v, session);
+    public QuestionnaireService(IDao<Questionnaire, Long> dao) {
+        super(dao);
     }
 
     @SuppressWarnings(value = {"unchecked"})
