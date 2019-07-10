@@ -16,4 +16,6 @@ public interface IDao<Entity, Key extends Serializable> {
     void remove(Entity entity) throws PersistenceException;
 
     Collection<Entity> getAll(String tableName);
+
+    String getTableName();
 }
