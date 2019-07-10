@@ -26,6 +26,11 @@ public class Interval<N extends Number> {
         this.rightLimit = rightLimit;
     }
 
+    public Interval(N singleValue) {
+        leftLimit = singleValue;
+        rightLimit = singleValue;
+    }
+
     public boolean contains(N value) {
         return value.doubleValue() >= leftLimit.doubleValue()
                 && value.doubleValue() <= rightLimit.doubleValue();
