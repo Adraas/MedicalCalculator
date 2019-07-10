@@ -25,7 +25,7 @@ public class QuestionnaireService extends Service<Questionnaire, Long> {
         Questionnaire questionnaire = getByTitle(title);
         Set<ImmutablePair<String, String>> resultSet = new HashSet<>();
         for (double score : scores) {
-            Iterator<PatientCondition> iterator = questionnaire.getPatientCondition().iterator();
+            Iterator<PatientCondition> iterator = questionnaire.getPatientConditions().iterator();
             boolean isNotSaved = true;
             while (isNotSaved && iterator.hasNext()) {
                 PatientCondition patientCondition = iterator.next();
