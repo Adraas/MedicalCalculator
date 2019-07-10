@@ -2,7 +2,6 @@ package ru.code.open.dao;
 
 import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
-import ru.code.open.entities.Patient;
 import ru.code.open.entities.Questionnaire;
 
 public class QuestionnaireDao extends Dao<Questionnaire, Long> {
