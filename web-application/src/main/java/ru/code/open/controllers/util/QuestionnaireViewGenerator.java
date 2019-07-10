@@ -2,6 +2,8 @@ package ru.code.open.controllers.util;
 
 import ru.code.open.MedicalCalculatorFacade;
 import ru.code.open.RepositoryFacade;
+import ru.code.open.entities.Answer;
+import ru.code.open.entities.Question;
 import ru.code.open.entities.Questionnaire;
 import ru.code.open.service.QuestionnaireService;
 
@@ -13,7 +15,17 @@ public class QuestionnaireViewGenerator {
         Questionnaire questionnaire =
                 ((QuestionnaireService) medicalCalculatorFacade.getRepositoryFacade().getService()).getByTitle(title);
         String questionnaireData = "";
-        //
+        for (Question question: questionnaire.getQuestions()) {
+            questionnaireData = questionnaireData.concat(question.getQuestionWording()).concat("<br/><br/>");
+            if(question.getAnswers().isEmpty())
+                questionnaireData = questionnaireData.concat("<input  type='text' name='answer'  value='' /><br/><br/>");
+            else {
+                for (Answer answer: question.getAnswers()) {
+                    questionnaireData = questionnaireData.concat(" <input  type='radio' name='answer'/>").concat(answer.getAnswerWording()).concat("<br/><br/>");
+                }
+            }
+        }
+        questionnaireData = questionnaireData.concat("<input type='submit' name='button' value='Вычислить'>");
         return questionnaireData;
     }
 }
