@@ -10,6 +10,7 @@ public class QuestionnaireService extends Service<Questionnaire, Long> {
         super(v, session);
     }
 
+    @SuppressWarnings(value = {"unchecked"})
     public Questionnaire getByTitle(String title) {
         NativeQuery<Questionnaire> nativeQuery = getSession().createNativeQuery("SELECT * FROM questionnaire WHERE title = :title");
         nativeQuery.setParameter("title", title);
