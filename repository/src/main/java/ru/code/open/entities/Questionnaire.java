@@ -33,16 +33,16 @@ public class Questionnaire {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Question> questions;
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
-    private Set<PatientCondition> patientCondition;
+    private Set<PatientCondition> patientConditions;
     @Column(name = "medical_questionnaire_type", nullable = false)
     @Enumerated(STRING)
     private MedicalQuestionnaireType medicalQuestionnaireType;
 
-    public Questionnaire(String title, Set<Question> questions, Set<PatientCondition> patientCondition,
+    public Questionnaire(String title, Set<Question> questions, Set<PatientCondition> patientConditions,
                          MedicalQuestionnaireType medicalQuestionnaireType) {
         this.title = title;
         this.questions = questions;
-        this.patientCondition = patientCondition;
+        this.patientConditions = patientConditions;
         this.medicalQuestionnaireType = medicalQuestionnaireType;
     }
 }
