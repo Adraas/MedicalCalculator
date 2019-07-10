@@ -8,9 +8,11 @@ import ru.code.open.functions.FunctionInitializer;
 public class MedicalCalculatorFacade {
 
     private MedicalCalculator medicalCalculator;
+    private RepositoryFacade repositoryFacade;
 
-    public MedicalCalculatorFacade() {
+    public MedicalCalculatorFacade(RepositoryFacade repositoryFacade) {
         medicalCalculator = new MedicalCalculator();
         FunctionInitializer.initializeFunctions();
+        this.repositoryFacade = repositoryFacade;
     }
 }
