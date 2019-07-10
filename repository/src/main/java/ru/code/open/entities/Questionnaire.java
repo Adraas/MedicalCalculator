@@ -3,8 +3,8 @@ package ru.code.open.entities;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -29,7 +29,7 @@ public class Questionnaire {
     private long id;
     @Column(name = "title", nullable = false)
     private String title;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<Question> questions;
     @OneToMany(fetch = FetchType.EAGER)
     private Set<PatientCondition> patientCondition;
