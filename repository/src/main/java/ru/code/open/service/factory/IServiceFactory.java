@@ -5,5 +5,5 @@ import ru.code.open.service.IService;
 
 public interface IServiceFactory {
 
-    public IService createService(IDao iDao);
+    IService createService(IDao iDao);
 }
