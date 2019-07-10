@@ -12,6 +12,7 @@ import ru.code.open.entities.Questionnaire;
 public class DaoFactory implements IDaoFactory {
 
     @Override
+    @SuppressWarnings(value = {"unchecked"})
     public IDao createDao(Class entityInstanceClass, Session session) {
         return entityInstanceClass.equals(Patient.class) ? new PatientDao(entityInstanceClass, session)
                 : entityInstanceClass.equals(Questionnaire.class) ? new QuestionnaireDao(entityInstanceClass, session)
