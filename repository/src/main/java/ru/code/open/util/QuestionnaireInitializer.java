@@ -23,7 +23,7 @@ public class QuestionnaireInitializer {
         initializeCreatineLevelQuestionnaire(service);
         initializeRivermideQuestionnaire(service);
         initializeGlomerularFiltrationRateQuestionnaire(service);
-        // TODO: init all 12 questionnaires by different methods (12 calls)
+        // TODO: init all 11 questionnaires by different methods (11 calls)
         isInitialized = true;
     }
 
