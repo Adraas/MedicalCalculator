@@ -57,15 +57,15 @@ public class QuestionnaireViewGenerator {
         for (Question question : questions) {
             questionnaireData = questionnaireData.concat(question.getQuestionWording()).concat("<br/>");
             if (question.getAnswers() == null)
-                questionnaireData = questionnaireData.concat("<input type='text' name='answer_")
+                questionnaireData = questionnaireData.concat("<input type=\"text\" name=\"answer_")
                         .concat(String.valueOf(firstIndex)).concat("-").concat(String.valueOf(secondIndex))
-                        .concat("' value=''/><br/><br/>");
+                        .concat("\" value=\"\"/><br/><br/>");
             else {
                 for (Answer answer : question.getAnswers()) {
-                    questionnaireData = questionnaireData.concat("<input type='radio' name='answer_")
+                    questionnaireData = questionnaireData.concat("<input type=\"radio\" name=\"answer_")
                             .concat(String.valueOf(firstIndex)).concat("-").concat(String.valueOf(secondIndex))
-                            .concat("' value='")
-                            .concat(answer.getAnswerWording()).concat("'/><br/>");
+                            .concat("\" value=\"")
+                            .concat(answer.getAnswerWording()).concat("\"/><br/>");
                     secondIndex++;
                 }
                 firstIndex++;
