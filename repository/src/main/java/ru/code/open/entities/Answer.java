@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 
 /**
  * The class {@code Answer} is an embeddable type for the {@code Question} embeddable type. This embeddable type
@@ -28,14 +29,22 @@ public class Answer {
     private long grade;
 
     /**
+     * The state which the system arrives by this answer.
+     */
+    @Embedded
+    private State state;
+
+    /**
      * Initializes a newly created {@code Answer} object, with the initialization of the fields with the given
      * values.
      *
      * @param answerWording {@link #answerWording}
      * @param grade         {@link #grade}
+     * @param state         {@link #state}
      */
-    public Answer(String answerWording, long grade) {
+    public Answer(String answerWording, long grade, State state) {
         this.answerWording = answerWording;
         this.grade = grade;
+        this.state = state;
     }
 }
