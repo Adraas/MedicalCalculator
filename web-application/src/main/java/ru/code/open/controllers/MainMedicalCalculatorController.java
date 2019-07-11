@@ -20,7 +20,7 @@ public class MainMedicalCalculatorController {
                 return QuestionnairesViewGenerator.getQuestionnairesData();
             } catch (PersistenceException e) {
                 e.printStackTrace();
-                return e.getMessage();
+                return null;
             }
         }
         return null;
@@ -35,7 +35,7 @@ public class MainMedicalCalculatorController {
                 return QuestionnaireViewGenerator.getQuestionnaireData(title);
             } catch (PersistenceException e) {
                 e.printStackTrace();
-                return e.getMessage();
+                return null;
             }
         }
         return null;
