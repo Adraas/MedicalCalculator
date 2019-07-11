@@ -14,18 +14,12 @@ import java.util.Set;
 public class QuestionnaireViewGenerator {
 
     public static String getQuestionnaireData(String title) throws PersistenceException {
-        MedicalCalculatorFacade medicalCalculatorFacade =
-                new MedicalCalculatorFacade(new RepositoryFacade("h2_entity_manager", Questionnaire.class));
-        Questionnaire questionnaire =
-                ((QuestionnaireService) medicalCalculatorFacade.getRepositoryFacade().getService()).getByTitle(title);
+        Questionnaire questionnaire = getQuestionnaireDate(title);
         return getQuestionnaireData(questionnaire.getQuestions());
     }
 
     public static String getQuestionnaireData(String title, String index) throws PersistenceException {
-        MedicalCalculatorFacade medicalCalculatorFacade =
-                new MedicalCalculatorFacade(new RepositoryFacade("h2_entity_manager", Questionnaire.class));
-        Questionnaire questionnaire =
-                ((QuestionnaireService) medicalCalculatorFacade.getRepositoryFacade().getService()).getByTitle(title);
+        Questionnaire questionnaire = getQuestionnaireDate(title);
         String[] indexes = index.split("-");
         if (indexes.length == 2) {
             byte firstIndex = Byte.parseByte(indexes[0]);
@@ -46,6 +40,12 @@ public class QuestionnaireViewGenerator {
             }
         }
         return null;
+    }
+
+    private static Questionnaire getQuestionnaireDate(String title) throws PersistenceException {
+        MedicalCalculatorFacade medicalCalculatorFacade =
+                new MedicalCalculatorFacade(new RepositoryFacade("h2_entity_manager", Questionnaire.class));
+        return ((QuestionnaireService) medicalCalculatorFacade.getRepositoryFacade().getService()).getByTitle(title);
     }
 
     private static String getQuestionnaireData(Set<Question> questions) {
