@@ -6,10 +6,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ru.code.open.controllers.util.QuestionnaireViewGenerator;
+import ru.code.open.controllers.util.QuestionnairesViewGenerator;
 import ru.code.open.exceptions.PersistenceException;
 
 @Controller
 public class MedicalCalculatorController {
+
+    @RequestMapping(path = "/questionnaires-loading", method = RequestMethod.GET)
+    @ResponseBody
+    public String getQuestionnairesData(@RequestParam(name = "message-type") String requestMessage) {
+        if (requestMessage.equals("get-all-questionnaires")) {
+            try {
+                return QuestionnairesViewGenerator.getQuestionnairesData();
+            } catch (PersistenceException e) {
+                e.printStackTrace();
+                return e.getMessage();
+            }
+        }
+        return null;
+    }
 
     @RequestMapping(path = "/questionnaire-loading", method = RequestMethod.GET)
     @ResponseBody
