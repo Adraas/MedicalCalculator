@@ -1,5 +1,6 @@
 package ru.code.open.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import javax.persistence.Embedded;
  * represents a some answer data.
  */
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
 public class Answer {
@@ -33,18 +35,4 @@ public class Answer {
      */
     @Embedded
     private State state;
-
-    /**
-     * Initializes a newly created {@code Answer} object, with the initialization of the fields with the given
-     * values.
-     *
-     * @param answerWording {@link #answerWording}
-     * @param grade         {@link #grade}
-     * @param state         {@link #state}
-     */
-    public Answer(String answerWording, long grade, State state) {
-        this.answerWording = answerWording;
-        this.grade = grade;
-        this.state = state;
-    }
 }
