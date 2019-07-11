@@ -15,7 +15,7 @@ public class MedicalCalculator {
     public Collection<Double> calculate(String calculatorTitle, String calculatorType, Map<String, Double> answers) {
         MedicalQuestionnaireType type = MedicalQuestionnaireType.valueOf(calculatorType);
         switch (type) {
-            case POINTS_SUMMATION_CALCUATOR:
+            case POINTS_SUMMATION_CALCULATOR:
                 return totalScoreCalculate(answers.values());
             case FORMULA_CALCULATOR:
                 return calculateByFormulas(calculatorTitle, answers);
