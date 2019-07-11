@@ -15,7 +15,7 @@ public class QuestionnairesViewGenerator {
         for (Questionnaire questionnaire : questionnaires) {
             String input = "<input type=\"button\" onclick=\"MedicalCalculators.receiveQuestionnaire('"
                     .concat(questionnaire.getTitle())
-                    .concat("')\" ")
+                    .concat("', '<input type=\"button\" value=\"Вычислить\">')\" ")
                     .concat("value=\"").concat(questionnaire.getTitle()).concat("\"/>");
             questionnairesData = questionnairesData.concat(input).concat("<br/>");
         }
