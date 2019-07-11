@@ -10,7 +10,7 @@ import ru.code.open.controllers.util.QuestionnairesViewGenerator;
 import ru.code.open.exceptions.PersistenceException;
 
 @Controller
-public class MedicalCalculatorController {
+public class MainMedicalCalculatorController {
 
     @RequestMapping(path = "/questionnaires-loading", method = RequestMethod.GET)
     @ResponseBody
