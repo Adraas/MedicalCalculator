@@ -23,7 +23,8 @@ public class QuestionnaireInitializer {
         initializeCreatineLevelQuestionnaire(service);
         initializeRivermideQuestionnaire(service);
         initializeGlomerularFiltrationRateQuestionnaire(service);
-        // TODO: init all 11 questionnaires by different methods (11 calls)
+        initializeRichmondQuestionnaire(service);
+        // TODO: init all 10 questionnaires by different methods (10 calls)
         isInitialized = true;
     }
 
@@ -161,6 +162,51 @@ public class QuestionnaireInitializer {
             answer = new Answer("Нет", 1, null);
             answers.add(answer);
             question = new Question("Соответствие IDMS", answers);
+            questions.add(question);
+            questionnaire = new Questionnaire(title, questions, patientConditions,
+                    MedicalQuestionnaireType.FORMULA_CALCULATOR);
+            service.create(questionnaire);
+        }
+    }
+
+    private static void initializeRichmondQuestionnaire(IService<Questionnaire, Long> service)
+            throws PersistenceException {
+        String title = "Шкала возбуждения-седации Ричмонда";
+        Questionnaire questionnaire = ((QuestionnaireService) service).getByTitle(title);
+        if (questionnaire == null) {
+            Set<PatientCondition> patientConditions = new LinkedHashSet<>();
+            Set<Question> questions = new LinkedHashSet<>();
+            Set<Answer> answers = new LinkedHashSet<>();
+
+            Answer answer = new Answer("Да", 1, null);
+            answers.add(answer);
+            answer = new Answer("Нет", 0, null);
+            answers.add(answer);
+            Question question = new Question("Пациен бодрствует, спокоен и внимателен", answers);
+            questions.add(question);
+
+            answers = new LinkedHashSet<>();
+            answer = new Answer("Да", 2, null);
+            answers.add(answer);
+            answer = new Answer("Нет", 0, null);
+            answers.add(answer);
+            question = new Question("Пациент беспокоен, испытывает волнение", answers);
+            questions.add(question);
+
+            answers = new LinkedHashSet<>();
+            answer = new Answer("Да", 3, null);
+            answers.add(answer);
+            answer = new Answer("Нет", 0, null);
+            answers.add(answer);
+            question = new Question("Пациент сонлив, но реагирует на голос", answers);
+            questions.add(question);
+
+            answers = new LinkedHashSet<>();
+            answer = new Answer("Да", 4, null);
+            answers.add(answer);
+            answer = new Answer("Нет", 0, null);
+            answers.add(answer);
+            question = new Question("Пациент не реагирует на голос", answers);
             questions.add(question);
             questionnaire = new Questionnaire(title, questions, patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
