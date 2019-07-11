@@ -1,5 +1,6 @@
 package ru.code.open.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.util.Set;
  * represents a some question data.
  */
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
 public class Question {
@@ -29,16 +31,4 @@ public class Question {
      */
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Answer> answers;
-
-    /**
-     * Initializes a newly created {@code Question} object, with the initialization of the fields with the given
-     * values.
-     *
-     * @param questionWording {@link #questionWording}
-     * @param answers         {@link #answers}
-     */
-    public Question(String questionWording, Set<Answer> answers) {
-        this.questionWording = questionWording;
-        this.answers = answers;
-    }
 }
