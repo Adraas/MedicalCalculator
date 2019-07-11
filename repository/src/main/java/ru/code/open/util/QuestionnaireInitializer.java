@@ -24,6 +24,7 @@ public class QuestionnaireInitializer {
         initializeRivermideQuestionnaire(service);
         initializeGlomerularFiltrationRateQuestionnaire(service);
         initializeRichmondQuestionnaire(service);
+        initializeGraceQuestionnaire(service);
         // TODO: init all 10 questionnaires by different methods (10 calls)
         isInitialized = true;
     }
@@ -207,6 +208,61 @@ public class QuestionnaireInitializer {
             answer = new Answer("Нет", 0, null);
             answers.add(answer);
             question = new Question("Пациент не реагирует на голос", answers);
+            questions.add(question);
+            questionnaire = new Questionnaire(title, questions, patientConditions,
+                    MedicalQuestionnaireType.FORMULA_CALCULATOR);
+            service.create(questionnaire);
+        }
+    }
+
+    private static void initializeGraceQuestionnaire(IService<Questionnaire, Long> service)
+            throws PersistenceException {
+        String title = "Шкала GRACE";
+        Questionnaire questionnaire = ((QuestionnaireService) service).getByTitle(title);
+        if (questionnaire == null) {
+            Set<PatientCondition> patientConditions = new LinkedHashSet<>();
+            Set<Question> questions = new LinkedHashSet<>();
+            Question question = new Question("Возраст, лет", null);
+            questions.add(question);
+            question = new Question("ЧСС, уд/мин", null);
+            questions.add(question);
+            question = new Question("Систолическое АД, мм. рт. ст.", null);
+            questions.add(question);
+            question = new Question("Креатинин, мкмоль/л", null);
+            questions.add(question);
+
+            Set<Answer> answers = new LinkedHashSet<>();
+            Answer answer = new Answer("Да", 1, null);
+            answers.add(answer);
+            answer = new Answer("Нет", 0, null);
+            answers.add(answer);
+            question = new Question("Остановка сердца", answers);
+            questions.add(question);
+            answer = new Answer("Да", 1, null);
+            answers.add(answer);
+            answer = new Answer("Нет", 0, null);
+            answers.add(answer);
+            question = new Question("Отклонение сегмента ST", answers);
+            questions.add(question);
+            answer = new Answer("Да", 1, null);
+            answers.add(answer);
+            answer = new Answer("Нет", 0, null);
+            answers.add(answer);
+            question = new Question("Высокий уровень сердечных ферментов", answers);
+            questions.add(question);
+
+            answers = new LinkedHashSet<>();
+            answer = new Answer("Отсутствие признаков застойной сердечной недостаточности",
+                    1, null);
+            answers.add(answer);
+            answer = new Answer("Наличие хрипа лёгких", 2, null);
+            answers.add(answer);
+            answer = new Answer("Наличие отёка лёгких", 3, null);
+            answers.add(answer);
+            answer = new Answer("Наличие кардиогенного шока", 4, null);
+            answers.add(answer);
+            question = new Question("Класс сердечной недостаточности "
+                    .concat("(по классификации Killip)"), answers);
             questions.add(question);
             questionnaire = new Questionnaire(title, questions, patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
