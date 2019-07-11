@@ -1,10 +1,10 @@
 package ru.code.open.util;
+
 import ru.code.open.dao.IDao;
 import ru.code.open.dao.factory.DaoFactory;
 import ru.code.open.dao.factory.IDaoFactory;
 
 import java.util.HashMap;
-
 import java.util.Map;
 
 public class DaoRepository {
