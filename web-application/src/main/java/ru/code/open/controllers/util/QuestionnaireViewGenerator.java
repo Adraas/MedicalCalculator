@@ -20,7 +20,7 @@ public class QuestionnaireViewGenerator {
         String questionnaireData = "<div>";
         for (Question question : questionnaire.getQuestions()) {
             questionnaireData = questionnaireData.concat(question.getQuestionWording()).concat("<br/>");
-            if (question.getAnswers().isEmpty())
+            if (question.getAnswers() == null)
                 questionnaireData = questionnaireData.concat("<input type='text' name='answer_")
                         .concat(String.valueOf(firstIndex)).concat("-").concat(String.valueOf(secondIndex))
                         .concat("' value=''/><br/><br/>");
@@ -37,8 +37,7 @@ public class QuestionnaireViewGenerator {
                 questionnaireData = questionnaireData.concat("<br/>");
             }
         }
-        questionnaireData = questionnaireData.concat("<input type='submit' name='calculationButton' value='Вычислить'>")
-                .concat("</div>");
+        questionnaireData = questionnaireData.concat("</div>");
         return questionnaireData;
     }
 }
