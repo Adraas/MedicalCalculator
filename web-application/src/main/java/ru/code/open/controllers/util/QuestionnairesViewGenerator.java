@@ -13,7 +13,7 @@ public class QuestionnairesViewGenerator {
         String questionnairesData = "<div>";
         Collection<Questionnaire> questionnaires = getQuestionnaires();
         for (Questionnaire questionnaire : questionnaires) {
-            String input = "<input type=\"button\" onclick=\"MedicalCalculator.receiveQuestionnaire('"
+            String input = "<input type=\"button\" onclick=\"MedicalCalculators.receiveQuestionnaire('"
                     .concat(questionnaire.getTitle())
                     .concat("')\" ")
                     .concat("value=\"").concat(questionnaire.getTitle()).concat("\"/>");

@@ -1,11 +1,11 @@
-class MedicalCalculator {
+class MedicalCalculators {
 
     static xmlHttp = new XMLHttpRequest();
 
     static receiveQuestionnaires() {
         this.xmlHttp.onload = function () {
             let parentNodeId = "questionnaires";
-            MedicalCalculator.updateChildElements(parentNodeId);
+            MedicalCalculators.updateChildElements(parentNodeId);
         };
         this.xmlHttp.open("GET", "/questionnaires-loading", false);
         this.xmlHttp.setRequestHeader("Content-Type", "text/plain; charset=UTF-8");
@@ -16,7 +16,7 @@ class MedicalCalculator {
         this.xmlHttp.onload = function () {
             let parentNodeId = "calculator";
             let anchorId = "current_calculator";
-            MedicalCalculator.updateChildElements(parentNodeId);
+            MedicalCalculators.updateChildElements(parentNodeId);
             window.location = "#" + anchorId
         };
         this.xmlHttp.open("GET", "/questionnaire-loading", true);
@@ -25,7 +25,7 @@ class MedicalCalculator {
     }
 
     static updateChildElements(parentNodeId) {
-        let response = MedicalCalculator.xmlHttp.responseText;
+        let response = MedicalCalculators.xmlHttp.responseText;
         if (response != null && response.trim() !== "") {
             let container = document.getElementById(parentNodeId);
             while (container.firstChild) {
