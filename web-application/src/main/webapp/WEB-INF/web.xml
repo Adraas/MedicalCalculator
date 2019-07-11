@@ -13,7 +13,7 @@
     </jsp-config>
 
     <welcome-file-list>
-        <welcome-file>medical-calculator</welcome-file>
+        <welcome-file>medical-calculators.html</welcome-file>
     </welcome-file-list>
 
     <listener>
