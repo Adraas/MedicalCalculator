@@ -18,23 +18,26 @@ public class QuestionnaireViewGenerator {
         return getQuestionnaireData(questionnaire.getQuestions());
     }
 
-    public static String getQuestionnaireData(String title, String index) throws PersistenceException {
+    public static String getQuestionnaireData(String title, String answerIndex) throws PersistenceException {
         Questionnaire questionnaire = getQuestionnaireDate(title);
-        String[] indexes = index.split("-");
-        if (indexes.length == 2) {
-            byte firstIndex = Byte.parseByte(indexes[0]);
-            byte secondIndex = Byte.parseByte(indexes[1]);
-            Iterator<Question> questionIterator = questionnaire.getQuestions().iterator();
-            for (int i = 0; questionIterator.hasNext() && i < firstIndex; i++) {
-                Question question = questionIterator.next();
-                if (question.getAnswers() != null) {
-                    Answer answer = null;
-                    Iterator<Answer> answerIterator = question.getAnswers().iterator();
-                    for (int j = 0; answerIterator.hasNext() && j < secondIndex; j++) {
-                        answer = answerIterator.next();
-                    }
-                    if (answer != null && answer.getState() != null && answer.getState().getQuestions() != null) {
-                        return getQuestionnaireData(answer.getState().getQuestions());
+        String[] answerIndexes = answerIndex.split("answer_");
+        if (answerIndexes.length == 2) {
+            String[] indexes = answerIndexes[1].split("-");
+            if (indexes.length == 2) {
+                byte firstIndex = Byte.parseByte(indexes[0]);
+                byte secondIndex = Byte.parseByte(indexes[1]);
+                Iterator<Question> questionIterator = questionnaire.getQuestions().iterator();
+                for (int i = 0; questionIterator.hasNext() && i < firstIndex; i++) {
+                    Question question = questionIterator.next();
+                    if (question.getAnswers() != null) {
+                        Answer answer = null;
+                        Iterator<Answer> answerIterator = question.getAnswers().iterator();
+                        for (int j = 0; answerIterator.hasNext() && j < secondIndex; j++) {
+                            answer = answerIterator.next();
+                        }
+                        if (answer != null && answer.getState() != null && answer.getState().getQuestions() != null) {
+                            return getQuestionnaireData(answer.getState().getQuestions());
+                        }
                     }
                 }
             }
