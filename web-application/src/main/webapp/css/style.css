@@ -1,0 +1,170 @@
+body {
+    background-image: url(/fonts/med.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-attachment: fixed
+}
+
+.animate-ul {
+    position: relative;
+    margin-top: 70px;
+    left: 50%;
+    display: flex;
+    transform: translate(-50%, -50%);
+}
+
+.animate-ul li {
+    list-style: none;
+    letter-spacing: 15px;
+    font-size: 5em;
+    font-family: fantasy;
+    color: #484848;
+    animation: ani 6s linear infinite
+}
+
+.animate-ul li:nth-child(1) {
+    animation-delay: 1s
+}
+
+.animate-ul li:nth-child(2) {
+    animation-delay: 2s
+}
+
+.animate-ul li:nth-child(3) {
+    animation-delay: 3s
+}
+
+.animate-ul li:nth-child(4) {
+    animation-delay: 4s
+}
+
+.animate-ul li:nth-child(5) {
+    animation-delay: 5s
+}
+
+.animate-ul li:nth-child(6) {
+    animation-delay: 6s
+}
+
+.animate-ul li:nth-child(7) {
+    animation-delay: 7s
+}
+
+.animate-ul li:nth-child(8) {
+    animation-delay: 8s
+}
+
+.animate-ul li:nth-child(9) {
+    animation-delay: 9s
+}
+
+.animate-ul li:nth-child(10) {
+    animation-delay: 9s
+}
+
+.animate-ul li:nth-child(11) {
+    animation-delay: 8s
+}
+
+.animate-ul li:nth-child(12) {
+    animation-delay: 7s
+}
+
+.animate-ul li:nth-child(13) {
+    animation-delay: 6s
+}
+
+.animate-ul li:nth-child(14) {
+    animation-delay: 5s
+}
+
+.animate-ul li:nth-child(15) {
+    animation-delay: 4s
+}
+
+.animate-ul li:nth-child(16) {
+    animation-delay: 3s
+}
+
+.animate-ul li:nth-child(17) {
+    animation-delay: 2s
+}
+
+.animate-ul li:nth-child(18) {
+    animation-delay: 1s
+}
+
+@keyframes ani {
+    0% {
+        color: #fff900;
+        text-shadow: none
+    }
+    10% {
+        color: #448480;
+        text-shadow: none
+    }
+    20% {
+        color: #193737;
+        text-shadow: none
+    }
+    90% {
+        color: #193737;
+        text-shadow: none
+    }
+    100% {
+        color: #fff900;
+        text-shadow: 0 0 7px #fff900, 0 0 70px #fff123
+    }
+}
+
+#calculator {
+    background: rgba(102, 102, 102, 0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+#current_calculator {
+    width: 500px;
+    height: 150px;
+    text-align: center;
+    padding: 15px;
+    border: 5px solid #133541;
+    -moz-box-shadow: 0 0 10px #fff900;
+    -webkit-box-shadow: 0 0 10px #fff900;
+    box-shadow: 0 0 10px #fff900;;
+    border-radius: 10px;
+    color: #fff900;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background: #4b939f;
+}
+
+#calculator:target {
+    display: block;
+}
+
+.close {
+    display: inline-block;
+    border: 2px solid #fff900;
+    border-radius: 10px;
+    color: #fff900;
+    padding: 0 12px;
+    margin: 10px;
+    text-decoration: none;
+    background: #6eb0be;
+    font-size: 14pt;
+    cursor: pointer;
+}
+
+.close:hover {
+    background: #e6e6ff;
+}
