@@ -15,7 +15,7 @@ public class QuestionnaireViewGenerator {
 
     public static String getQuestionnaireData(String title) throws PersistenceException {
         Questionnaire questionnaire = getQuestionnaireDate(title);
-        return getQuestionnaireData(questionnaire.getQuestions());
+        return getQuestionnaireData(questionnaire.getQuestions(), (byte) 0);
     }
 
     public static String getQuestionnaireData(String title, String answerIndex) throws PersistenceException {
@@ -36,7 +36,7 @@ public class QuestionnaireViewGenerator {
                             answer = answerIterator.next();
                         }
                         if (answer != null && answer.getState() != null && answer.getState().getQuestions() != null) {
-                            return getQuestionnaireData(answer.getState().getQuestions());
+                            return getQuestionnaireData(answer.getState().getQuestions(), ++firstIndex);
                         }
                     }
                 }
@@ -51,8 +51,7 @@ public class QuestionnaireViewGenerator {
         return ((QuestionnaireService) medicalCalculatorFacade.getRepositoryFacade().getService()).getByTitle(title);
     }
 
-    private static String getQuestionnaireData(Set<Question> questions) {
-        byte firstIndex = 0;
+    private static String getQuestionnaireData(Set<Question> questions, byte firstIndex) {
         byte secondIndex = 0;
         String questionnaireData = "<div>";
         for (Question question : questions) {
