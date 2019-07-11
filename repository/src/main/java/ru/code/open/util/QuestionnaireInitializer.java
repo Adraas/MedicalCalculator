@@ -21,7 +21,8 @@ public class QuestionnaireInitializer {
     public static void initializeAllQuestionnaire(IService<Questionnaire, Long> service) throws PersistenceException {
         initializeDrugAdministrationRateQuestionnaire(service);
         initializeCreatineLevelQuestionnaire(service);
-        // TODO: init all 14 questionnaires by different methods (14 calls)
+        initializeRivermideQuestionnaire(service);
+        // TODO: init all 12 questionnaires by different methods (12 calls)
         isInitialized = true;
     }
 
@@ -32,10 +33,9 @@ public class QuestionnaireInitializer {
         if (questionnaire == null) {
             Set<PatientCondition> patientConditions = new LinkedHashSet<>();
             Set<Question> questions = new LinkedHashSet<>();
-            Set<Answer> answers = new LinkedHashSet<>();
-            Question question = new Question("Объем раствора, мл", answers);
+            Question question = new Question("Объем раствора, мл", null);
             questions.add(question);
-            question = new Question("Желаемое время введения, минут", answers);
+            question = new Question("Желаемое время введения, минут", null);
             questions.add(question);
             questionnaire = new Questionnaire(title, questions, patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
@@ -50,12 +50,74 @@ public class QuestionnaireInitializer {
         if (questionnaire == null) {
             Set<PatientCondition> patientConditions = new LinkedHashSet<>();
             Set<Question> questions = new LinkedHashSet<>();
+            Question question = new Question("Возраст, лет", null);
+            questions.add(question);
+            question = new Question("Вес, кг", null);
+            questions.add(question);
+            question = new Question("Креатинин,мкмоль/л", null);
+            questions.add(question);
+            questionnaire = new Questionnaire(title, questions, patientConditions,
+                    MedicalQuestionnaireType.FORMULA_CALCULATOR);
+            service.create(questionnaire);
+        }
+    }
+
+    private static void initializeRivermideQuestionnaire(IService<Questionnaire, Long> service)
+            throws PersistenceException {
+        String title = "Оценочная шкала индекса мобильности пациента Ривермид";
+        Questionnaire questionnaire = ((QuestionnaireService) service).getByTitle(title);
+        if (questionnaire == null) {
+            Set<PatientCondition> patientConditions = new LinkedHashSet<>();
+            Set<Question> questions = new LinkedHashSet<>();
             Set<Answer> answers = new LinkedHashSet<>();
-            Question question = new Question("Возраст, лет", answers);
+            Answer answer = new Answer("Да", 1, null);
+            answers.add(answer);
+            answer = new Answer("Нет", 0, null);
+            answers.add(answer);
+
+            Question question = new Question("Можете ли вы повернуться со спины "
+                    .concat("на бок без посторонней помощи?"), answers);
             questions.add(question);
-            question = new Question("Вес, кг", answers);
+            question = new Question("Можете ли вы из положения лежа "
+                    .concat("самостоятельно сесть на край постели?"), answers);
             questions.add(question);
-            question = new Question("Креатинин,мкмоль/л", answers);
+            question = new Question("Можете ли вы сидеть на краю постели "
+                    .concat("без поддержки в течение 10 секунд?"), answers);
+            questions.add(question);
+            question = new Question("Можете ли вы встать (с любого стула) менее чем "
+                    .concat("за 15 секунд и удерживаться в положении стоя около стула 15 секунд?"), answers);
+            questions.add(question);
+            question = new Question("Можете ли вы стоять без опоры 10 секунд?", answers);
+            questions.add(question);
+            question = new Question("Можете ли вы переместиться с постели "
+                    .concat("на стул и обратно без какой-либо помощи?"), answers);
+            questions.add(question);
+            question = new Question("Можете ли вы пройти 10 метров, используя, при необходимости, "
+                    .concat("вспомогательные средства, но без помощи постороннего лица?"), answers);
+            questions.add(question);
+            question = new Question("Можете ли вы подняться по лестнице "
+                    .concat("на один пролет без посторонней помощи?"), answers);
+            questions.add(question);
+            question = new Question("Можете ли вы ходить за пределами квартиры "
+                    .concat("(по тротуару) без посторонней помощи?"), answers);
+            questions.add(question);
+            question = new Question("Можете ли вы пройти 10 метров в пределах квартиры "
+                    .concat("без подручных средств и помощи постороннего лица?"), answers);
+            questions.add(question);
+            question = new Question("Если вы уронили что-то на пол, можете ли вы пройти 5 метров, "
+                    .concat("поднять предмет, который вы уронили, и вернуться обратно?"), answers);
+            questions.add(question);
+            question = new Question("Можете ли вы ходить за пределами квартиры без посторонней помощи "
+                    .concat("по неровной поверхности (трава, гравий, снег)?"), answers);
+            questions.add(question);
+            question = new Question("Можете ли вы войти в ванну (душевую кабину) и "
+                    .concat("выйти из нее без присмотра, вымыться самостоятельно?"), answers);
+            questions.add(question);
+            question = new Question("Можете ли вы подняться на 4 ступени и спуститься обратно, не опираясь на перила,"
+                    .concat("но, при необходимости, используя вспомогательные средства?"), answers);
+            questions.add(question);
+            question = new Question("Можете ли вы пробежать 10 метров, не прихрамывая, "
+                    .concat("за 4 секунды (допускается быстрая ходьба)"), answers);
             questions.add(question);
             questionnaire = new Questionnaire(title, questions, patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
