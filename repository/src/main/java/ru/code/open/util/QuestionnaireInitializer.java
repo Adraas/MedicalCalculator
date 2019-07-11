@@ -22,6 +22,7 @@ public class QuestionnaireInitializer {
         initializeDrugAdministrationRateQuestionnaire(service);
         initializeCreatineLevelQuestionnaire(service);
         initializeRivermideQuestionnaire(service);
+        initializeGlomerularFiltrationRateQuestionnaire(service);
         // TODO: init all 12 questionnaires by different methods (12 calls)
         isInitialized = true;
     }
@@ -118,6 +119,48 @@ public class QuestionnaireInitializer {
             questions.add(question);
             question = new Question("Можете ли вы пробежать 10 метров, не прихрамывая, "
                     .concat("за 4 секунды (допускается быстрая ходьба)"), answers);
+            questions.add(question);
+            questionnaire = new Questionnaire(title, questions, patientConditions,
+                    MedicalQuestionnaireType.FORMULA_CALCULATOR);
+            service.create(questionnaire);
+        }
+    }
+
+    private static void initializeGlomerularFiltrationRateQuestionnaire(IService<Questionnaire, Long> service)
+            throws PersistenceException {
+        String title = "Скорость клубочковой фильтрации по формулам MDRD и Schwartz";
+        Questionnaire questionnaire = ((QuestionnaireService) service).getByTitle(title);
+        if (questionnaire == null) {
+            Set<PatientCondition> patientConditions = new LinkedHashSet<>();
+            Set<Question> questions = new LinkedHashSet<>();
+            Set<Answer> answers = new LinkedHashSet<>();
+
+            Answer answer = new Answer("Мужской", 2, null);
+            answers.add(answer);
+            answer = new Answer("Женский", 1, null);
+            answers.add(answer);
+            Question question = new Question("Возраст, лет", answers);
+            questions.add(question);
+
+            question = new Question("Возраст, лет", null);
+            questions.add(question);
+            question = new Question("Креатинин сыворотки, мкмоль/л", null);
+            questions.add(question);
+
+            answers = new LinkedHashSet<>();
+            answer = new Answer("Белые", 2, null);
+            answers.add(answer);
+            answer = new Answer("Чёрные", 1, null);
+            answers.add(answer);
+            question = new Question("Раса", answers);
+            questions.add(question);
+
+            answers = new LinkedHashSet<>();
+            answer = new Answer("Да", 2, null);
+            answers.add(answer);
+            answer = new Answer("Нет", 1, null);
+            answers.add(answer);
+            question = new Question("Соответствие IDMS", answers);
             questions.add(question);
             questionnaire = new Questionnaire(title, questions, patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
