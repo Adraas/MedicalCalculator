@@ -25,7 +25,7 @@ public class QuestionnaireInitializer {
         initializeGlomerularFiltrationRateQuestionnaire(service);
         initializeRichmondQuestionnaire(service);
         initializeGraceQuestionnaire(service);
-        // TODO: init all 10 questionnaires by different methods (10 calls)
+        // TODO: init all 9 questionnaires by different methods (9 calls)
         isInitialized = true;
     }
 
