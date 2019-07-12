@@ -31,7 +31,7 @@ public class Answer {
     private long grade;
 
     /**
-     * The state which the system arrives by this answer (optionally).
+     * The startState which the system arrives by this answer (optionally).
      */
     @Embedded
     private State state;

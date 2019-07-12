@@ -15,7 +15,7 @@ public class QuestionnaireViewGenerator {
 
     public static String getQuestionnaireData(String title) throws PersistenceException {
         Questionnaire questionnaire = getQuestionnaireDate(title);
-        return getQuestionnaireData(questionnaire.getQuestions(), (byte) 0);
+        return getQuestionnaireData(questionnaire.getStartState().getQuestions(), (byte) 0);
     }
 
     public static String getQuestionnaireData(String title, String answerIndex) throws PersistenceException {
@@ -26,7 +26,7 @@ public class QuestionnaireViewGenerator {
             if (indexes.length == 2) {
                 byte firstIndex = Byte.parseByte(indexes[0]);
                 byte secondIndex = Byte.parseByte(indexes[1]);
-                Iterator<Question> questionIterator = questionnaire.getQuestions().iterator();
+                Iterator<Question> questionIterator = questionnaire.getStartState().getQuestions().iterator();
                 for (int i = 0; questionIterator.hasNext() && i < firstIndex; i++) {
                     Question question = questionIterator.next();
                     if (question.getAnswers() != null) {
