@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -43,10 +43,10 @@ public class Questionnaire {
     private String title;
 
     /**
-     * The questions collection of a medical calculator questionnaire.
+     * The start startState of this questionnaire.
      */
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Set<Question> questions;
+    @Embedded
+    private State startState;
 
     /**
      * The predefined possible values of the patient conditions for a scoring patient's questionnaire survey.
@@ -65,15 +65,15 @@ public class Questionnaire {
      * Initializes a newly created {@code Questionnaire} object, with the initialization of the fields with the given
      * values.
      *
-     * @param title                    {@link #title}
-     * @param questions                {@link #questions}
-     * @param patientConditions        {@link #patientConditions}
-     * @param medicalQuestionnaireType {@link #medicalQuestionnaireType}
+     * @param title                     {@link #title}
+     * @param startState                {@link #startState}
+     * @param patientConditions         {@link #patientConditions}
+     * @param medicalQuestionnaireType  {@link #medicalQuestionnaireType}
      */
-    public Questionnaire(String title, Set<Question> questions, Set<PatientCondition> patientConditions,
+    public Questionnaire(String title, State startState, Set<PatientCondition> patientConditions,
                          MedicalQuestionnaireType medicalQuestionnaireType) {
         this.title = title;
-        this.questions = questions;
+        this.startState = startState;
         this.patientConditions = patientConditions;
         this.medicalQuestionnaireType = medicalQuestionnaireType;
     }

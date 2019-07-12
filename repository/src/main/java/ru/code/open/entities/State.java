@@ -11,7 +11,7 @@ import java.util.Set;
 
 /**
  * The class {@code State} is an embeddable type for the {@code Answer} embeddable type. This embeddable type
- * represents a some state which the system arrives by the selected answer.
+ * represents a some startState which the system arrives by the selected answer.
  */
 @Data
 @AllArgsConstructor
@@ -20,7 +20,7 @@ import java.util.Set;
 public class State {
 
     /**
-     * The new questions collection of this state (optionally).
+     * The new questions collection of this startState (optionally).
      */
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Question> questions;

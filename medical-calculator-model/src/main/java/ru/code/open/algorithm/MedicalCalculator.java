@@ -20,7 +20,7 @@ public class MedicalCalculator {
             throws AlgorithmException {
         String calculatorTitle = questionnaire.getTitle();
         MedicalQuestionnaireType type = questionnaire.getMedicalQuestionnaireType();
-        if (hasAllRequiredAnswers(questionnaire.getQuestions(), answers.size(), 0)) {
+        if (hasAllRequiredAnswers(questionnaire.getStartState().getQuestions(), answers.size(), 0)) {
             switch (type) {
                 case POINTS_SUMMATION_CALCULATOR:
                     return totalScoreCalculate(answers.values());

@@ -6,6 +6,7 @@ import ru.code.open.entities.MedicalQuestionnaireType;
 import ru.code.open.entities.PatientCondition;
 import ru.code.open.entities.Question;
 import ru.code.open.entities.Questionnaire;
+import ru.code.open.entities.State;
 import ru.code.open.exceptions.PersistenceException;
 import ru.code.open.service.IService;
 import ru.code.open.service.QuestionnaireService;
@@ -19,19 +20,21 @@ public class QuestionnaireInitializer {
     private static boolean isInitialized;
 
     public static void initializeAllQuestionnaire(IService<Questionnaire, Long> service) throws PersistenceException {
-        initializeDrugAdministrationRateQuestionnaire(service);
-        initializeCreatineLevelQuestionnaire(service);
-        initializeRivermideQuestionnaire(service);
-        initializeGlomerularFiltrationRateQuestionnaire(service);
-        initializeRichmondQuestionnaire(service);
-        initializeGraceQuestionnaire(service);
-        initializeTinettiScale(service);
-        initializeNIHSSScale(service);
-        initializeHuntHessScale(service);
-        initializeIndexBartel(service);
-        initializeGlasgowComaScale(service);
-        initializeGlasgowComaFOUR(service);
-        // TODO: init all 3 missing questionnaires by different methods (3 calls)
+        if (!isInitialized) {
+            initializeDrugAdministrationRateQuestionnaire(service);
+            initializeCreatineLevelQuestionnaire(service);
+            initializeRivermideQuestionnaire(service);
+            initializeGlomerularFiltrationRateQuestionnaire(service);
+            initializeRichmondQuestionnaire(service);
+            initializeGraceQuestionnaire(service);
+            initializeTinettiScale(service);
+            initializeNIHSSScale(service);
+            initializeHuntHessScale(service);
+            initializeIndexBartel(service);
+            initializeGlasgowComaScale(service);
+            initializeGlasgowComaFOUR(service);
+            // TODO: init all 3 missing questionnaires by different methods (3 calls)
+        }
         isInitialized = true;
     }
 
@@ -46,7 +49,7 @@ public class QuestionnaireInitializer {
             questions.add(question);
             question = new Question("Желаемое время введения, минут", null);
             questions.add(question);
-            questionnaire = new Questionnaire(title, questions, patientConditions,
+            questionnaire = new Questionnaire(title, new State(questions), patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
             service.create(questionnaire);
         }
@@ -65,7 +68,7 @@ public class QuestionnaireInitializer {
             questions.add(question);
             question = new Question("Креатинин,мкмоль/л", null);
             questions.add(question);
-            questionnaire = new Questionnaire(title, questions, patientConditions,
+            questionnaire = new Questionnaire(title, new State(questions), patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
             service.create(questionnaire);
         }
@@ -128,7 +131,7 @@ public class QuestionnaireInitializer {
             question = new Question("Можете ли вы пробежать 10 метров, не прихрамывая, "
                     .concat("за 4 секунды (допускается быстрая ходьба)"), answers);
             questions.add(question);
-            questionnaire = new Questionnaire(title, questions, patientConditions,
+            questionnaire = new Questionnaire(title, new State(questions), patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
             service.create(questionnaire);
         }
@@ -170,7 +173,7 @@ public class QuestionnaireInitializer {
             answers.add(answer);
             question = new Question("Соответствие IDMS", answers);
             questions.add(question);
-            questionnaire = new Questionnaire(title, questions, patientConditions,
+            questionnaire = new Questionnaire(title, new State(questions), patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
             service.create(questionnaire);
         }
@@ -215,7 +218,7 @@ public class QuestionnaireInitializer {
             answers.add(answer);
             question = new Question("Пациент не реагирует на голос", answers);
             questions.add(question);
-            questionnaire = new Questionnaire(title, questions, patientConditions,
+            questionnaire = new Questionnaire(title, new State(questions), patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
             service.create(questionnaire);
         }
@@ -270,7 +273,7 @@ public class QuestionnaireInitializer {
             question = new Question("Класс сердечной недостаточности "
                     .concat("(по классификации Killip)"), answers);
             questions.add(question);
-            questionnaire = new Questionnaire(title, questions, patientConditions,
+            questionnaire = new Questionnaire(title, new State(questions), patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
             service.create(questionnaire);
         }
@@ -454,7 +457,7 @@ public class QuestionnaireInitializer {
             question = new Question("Оцена походки", answers);
             questions.add(question);
 
-            questionnaire = new Questionnaire(title, questions, patientConditions,
+            questionnaire = new Questionnaire(title, new State(questions), patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
             service.create(questionnaire);
         }
@@ -620,7 +623,7 @@ public class QuestionnaireInitializer {
             question = new Question("Агнозия", answers);
             questions.add(question);
 
-            questionnaire = new Questionnaire(title, questions, patientConditions,
+            questionnaire = new Questionnaire(title, new State(questions), patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
             service.create(questionnaire);
         }
@@ -658,7 +661,7 @@ public class QuestionnaireInitializer {
             question = new Question("Есть ли у пациента сопутствующие системные заболевания и состояния: артериальная гипертензия, сахарный диабет, атеросклероз, ХОБЛ, или вазоспазм при ангиографии.", answers);
             questions.add(question);
 
-            questionnaire = new Questionnaire(title, questions, patientConditions,
+            questionnaire = new Questionnaire(title, new State(questions), patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
             service.create(questionnaire);
         }
@@ -771,7 +774,7 @@ public class QuestionnaireInitializer {
             answers.add(answer);
             question = new Question("Ходьба по лестнице", answers);
             questions.add(question);
-            questionnaire = new Questionnaire(title, questions, patientConditions,
+            questionnaire = new Questionnaire(title, new State(questions), patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
             service.create(questionnaire);
         }
@@ -827,7 +830,7 @@ public class QuestionnaireInitializer {
             question = new Question("Двигательная реакция", answers);
             questions.add(question);
 
-            questionnaire = new Questionnaire(title, questions, patientConditions,
+            questionnaire = new Questionnaire(title, new State(questions), patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
             service.create(questionnaire);
         }
@@ -897,7 +900,7 @@ public class QuestionnaireInitializer {
             question = new Question("Дыхательный паттерн", answers);
             questions.add(question);
 
-            questionnaire = new Questionnaire(title, questions, patientConditions,
+            questionnaire = new Questionnaire(title, new State(questions), patientConditions,
                     MedicalQuestionnaireType.FORMULA_CALCULATOR);
             service.create(questionnaire);
         }
