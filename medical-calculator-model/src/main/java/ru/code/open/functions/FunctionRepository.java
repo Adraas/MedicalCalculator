@@ -9,53 +9,56 @@ import java.util.function.Function;
 
 public class FunctionRepository {
 
-    private static Set<ImmutablePair<Set<String>, Function<Map<String, Double>, Double>>> functions;
+    private static Set<SingleFunctionContainer> functions;
 
     static {
         functions = new HashSet<>();
     }
 
-    public static Set<Function<Map<String, Double>, Double>> getFunctionsForGivenCalculator(String calculatorTitle) {
-        Set<Function<Map<String, Double>, Double>> resultSet = new HashSet<>();
-        for (ImmutablePair<Set<String>, Function<Map<String, Double>, Double>> currentPair : functions) {
-            if (currentPair.getCField().contains(calculatorTitle)) {
-                resultSet.add(currentPair.getFField());
+    public static Function<Map<String, Double>, Double> getFunctionForGivenCalculator(String calculatorTitle,
+                                                                                      Set<String> possibleValues) {
+        for (SingleFunctionContainer singleFunctionContainer : functions) {
+            if (singleFunctionContainer.getFunctions().getCField().contains(calculatorTitle)
+                    && singleFunctionContainer.getPossibleValues().equals(possibleValues)) {
+                return singleFunctionContainer.getFunctions().getFField();
             }
         }
-        return resultSet;
+        return null;
     }
 
-    public static void addFunctionForGivenCalculator(String calculatorTitle,
+    public static void addFunctionForGivenCalculator(String calculatorTitle, Set<String> possibleValues,
                                                      Function<Map<String, Double>, Double> function) {
         if (!isContains(calculatorTitle, function)) {
-            ImmutablePair<Set<String>, Function<Map<String, Double>, Double>> immutablePair =
-                    getImmutablePair(function);
-            if (immutablePair == null) {
+            SingleFunctionContainer singleFunctionContainer =
+                    getSingleFunctionContainer(function);
+            if (singleFunctionContainer == null) {
                 Set<String> calculatorTitles = new HashSet<>();
                 calculatorTitles.add(calculatorTitle);
-                functions.add(new ImmutablePair<>(calculatorTitles, function));
+                functions.add(new SingleFunctionContainer(new ImmutablePair<>(calculatorTitles, function),
+                        possibleValues));
             } else {
-                functions.remove(immutablePair);
-                immutablePair.getCField().add(calculatorTitle);
-                functions.add(immutablePair);
+                functions.remove(singleFunctionContainer);
+                singleFunctionContainer.getFunctions().getCField().add(calculatorTitle);
+                functions.add(singleFunctionContainer);
             }
         }
     }
 
     private static boolean isContains(String calculatorTitle, Function<Map<String, Double>, Double> function) {
-        for (ImmutablePair<Set<String>, Function<Map<String, Double>, Double>> currentPair : functions) {
-            if (currentPair.getFField().equals(function) && currentPair.getCField().contains(calculatorTitle)) {
+        for (SingleFunctionContainer singleFunctionContainer : functions) {
+            if (singleFunctionContainer.getFunctions().getFField().equals(function)
+                    && singleFunctionContainer.getFunctions().getCField().contains(calculatorTitle)) {
                 return true;
             }
         }
         return false;
     }
 
-    private static ImmutablePair<Set<String>, Function<Map<String, Double>, Double>> getImmutablePair(
+    private static SingleFunctionContainer getSingleFunctionContainer(
             Function<Map<String, Double>, Double> function) {
-        for (ImmutablePair<Set<String>, Function<Map<String, Double>, Double>> currentPair : functions) {
-            if (currentPair.getFField().equals(function)) {
-                return currentPair;
+        for (SingleFunctionContainer singleFunctionContainer : functions) {
+            if (singleFunctionContainer.getFunctions().getFField().equals(function)) {
+                return singleFunctionContainer;
             }
         }
         return null;

@@ -7,14 +7,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ru.code.open.MedicalCalculatorFacade;
 import ru.code.open.RepositoryFacade;
-import ru.code.open.entities.PatientCondition;
 import ru.code.open.entities.Questionnaire;
 import ru.code.open.exceptions.AlgorithmException;
 import ru.code.open.exceptions.PersistenceException;
 import ru.code.open.service.QuestionnaireService;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -39,31 +37,7 @@ public class SpecifyMedicalCalculatorController {
                     return null;
                 }
             }
-            List<Double> results = (List<Double>) medicalCalculatorFacade.getMedicalCalculator()
-                    .calculate(questionnaire, mapAnswers);
-            if (results.size() == 1) {
-                double resultForVerification = results.get(0);
-                for (PatientCondition patientCondition : questionnaire.getPatientConditions()) {
-                    if (patientCondition.getInterval().contains((int) resultForVerification)) {
-                        return patientCondition.getCondition()
-                                .concat("::").concat(patientCondition.getDescription()).concat(";");
-                    }
-                }
-                return String.valueOf(resultForVerification).concat(";");
-            } else {
-                String result = "";
-                for (double resultForVerification : results) {
-                    for (PatientCondition patientCondition : questionnaire.getPatientConditions()) {
-                        if (patientCondition.getInterval().contains((int) resultForVerification)) {
-                            result = result.concat(patientCondition.getCondition()
-                                    .concat("::").concat(patientCondition.getDescription())).concat(";");
-                        } else {
-                            result = result.concat(String.valueOf(resultForVerification)).concat(";");
-                        }
-                    }
-                }
-                return result;
-            }
+            return medicalCalculatorFacade.getMedicalCalculator().calculate(questionnaire, mapAnswers);
         } catch (AlgorithmException | PersistenceException e) {
             e.printStackTrace();
             return null;
