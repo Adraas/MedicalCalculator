@@ -4,21 +4,55 @@ import ru.code.open.exceptions.AlgorithmException;
 import ru.code.open.functions.util.Interval;
 import ru.code.open.functions.util.MeasureGRACEFunctionUtil;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 
 public class FunctionInitializer {
 
     public static void initializeFunctions() {
+        Set<String> possibleValues = new HashSet<>();
+
+        possibleValues.add("age");
+        possibleValues.add("weight");
+        possibleValues.add("gender");
+        possibleValues.add("serumCreatinine");
         FunctionRepository.addFunctionForGivenCalculator("Оценка клиренса креатинина по Cockcroft - Gault",
-                creatinineClearanceFunctionInit());
-        FunctionRepository.addFunctionForGivenCalculator("Шкала GRACE", measureGRACEFunctionInit());
+                possibleValues, creatinineClearanceFunctionInit());
+        possibleValues.clear();
+
+        possibleValues.add("age");
+        possibleValues.add("heartRate");
+        possibleValues.add("systolicBloodPressure");
+        possibleValues.add("serumCreatinine");
+        possibleValues.add("heartFailureSeverityType");
+        possibleValues.add("cardiacArrest");
+        possibleValues.add("stSegmentDeviation");
+        possibleValues.add("cardiospecificEnzymesLevelIncrease");
+        FunctionRepository.addFunctionForGivenCalculator("Шкала GRACE", possibleValues,
+                measureGRACEFunctionInit());
+        possibleValues.clear();
+
+        possibleValues.add("scr");
+        possibleValues.add("idms");
+        possibleValues.add("age");
+        possibleValues.add("gender");
+        possibleValues.add("race");
         FunctionRepository.addFunctionForGivenCalculator("Скорость клубочковой фильтрации по формулам "
-                .concat("MDRD и Schwartz"), explorationMDRDFunctionInit());
+                .concat("MDRD и Schwartz"), possibleValues, explorationMDRDFunctionInit());
+        possibleValues.clear();
+
+        possibleValues.add("growth");
+        possibleValues.add("scr");
         FunctionRepository.addFunctionForGivenCalculator("Скорость клубочковой фильтрации по формулам "
-                .concat("MDRD и Schwartz"), measureBySchwartzGJFunctionInit());
+                .concat("MDRD и Schwartz"), possibleValues, measureBySchwartzGJFunctionInit());
+        possibleValues.clear();
+
+        possibleValues.add("volume");
+        possibleValues.add("time");
         FunctionRepository.addFunctionForGivenCalculator("Расчет скорости внутривенного капельного "
-                .concat("введения препарата"), drugAdministrationRateFunctionInit());
+                .concat("введения препарата"), possibleValues, drugAdministrationRateFunctionInit());
     }
 
     private static Function<Map<String, Double>, Double> creatinineClearanceFunctionInit() {
