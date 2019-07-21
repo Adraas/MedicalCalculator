@@ -68,38 +68,38 @@ public class FunctionInitializer {
     private static Function<Map<String, Double>, Double> measureGRACEFunctionInit() {
         return (parametersByNames) -> {
             try {
-                Map<Interval<Integer>, Integer> age;
-                age = MeasureGRACEFunctionUtil.getAge();
-                Map<Interval<Integer>, Integer> heartRate = MeasureGRACEFunctionUtil.getHeartRate();
-                Map<Interval<Integer>, Integer> systolicBloodPressure =
+                Map<Interval<Integer>, Integer> ageMap;
+                ageMap = MeasureGRACEFunctionUtil.getAge();
+                Map<Interval<Integer>, Integer> heartRateMap = MeasureGRACEFunctionUtil.getHeartRate();
+                Map<Interval<Integer>, Integer> systolicBloodPressureMap =
                         MeasureGRACEFunctionUtil.getSystolicBloodPressure();
-                Map<Interval<Double>, Integer> serumCreatinine = MeasureGRACEFunctionUtil.getSerumCreatinine();
-                Map<String, Integer> heartFailureSeverity = MeasureGRACEFunctionUtil.getHeartFailureSeverity();
-                int ageScore = parametersByNames.get("ageScore").intValue();
-                ageScore = age.get(MeasureGRACEFunctionUtil.getInterval(ageScore, age));
-                int heartRateScore = parametersByNames.get("heartRateScore").intValue();
-                heartRateScore = heartRate.get(MeasureGRACEFunctionUtil.getInterval(heartRateScore, age));
-                int systolicBloodPressureScore = parametersByNames.get("systolicBloodPressureScore").intValue();
-                systolicBloodPressureScore = systolicBloodPressure.get(MeasureGRACEFunctionUtil
-                        .getInterval(systolicBloodPressureScore, age));
-                int serumCreatinineScore = parametersByNames.get("serumCreatinineScore").intValue();
-                serumCreatinineScore =
-                        serumCreatinine.get(MeasureGRACEFunctionUtil.getInterval(serumCreatinineScore, age));
+                Map<Interval<Double>, Integer> serumCreatinineMap = MeasureGRACEFunctionUtil.getSerumCreatinine();
+                Map<String, Integer> heartFailureSeverityMap = MeasureGRACEFunctionUtil.getHeartFailureSeverity();
+                int age = parametersByNames.get("age").intValue();
+                age = ageMap.get(MeasureGRACEFunctionUtil.getInterval(age, ageMap));
+                int heartRate = parametersByNames.get("heartRate").intValue();
+                heartRate = heartRateMap.get(MeasureGRACEFunctionUtil.getInterval(heartRate, ageMap));
+                int systolicBloodPressure = parametersByNames.get("systolicBloodPressure").intValue();
+                systolicBloodPressure = systolicBloodPressureMap.get(MeasureGRACEFunctionUtil
+                        .getInterval(systolicBloodPressure, ageMap));
+                int serumCreatinine = parametersByNames.get("serumCreatinine").intValue();
+                serumCreatinine =
+                        serumCreatinineMap.get(MeasureGRACEFunctionUtil.getInterval(serumCreatinine, ageMap));
                 byte heartFailureSeverityType = parametersByNames.get("heartFailureSeverityType").byteValue();
-                int heartFailureSeverityScore = heartFailureSeverityType == 0
-                        ? heartFailureSeverity.get("Кардиогенный шок (IV)")
+                int heartFailureSeverity = heartFailureSeverityType == 0
+                        ? heartFailureSeverityMap.get("Кардиогенный шок (IV)")
                         : heartFailureSeverityType == 1
-                        ? heartFailureSeverity.get("Острый отек легких (III)")
+                        ? heartFailureSeverityMap.get("Острый отек легких (III)")
                         : heartFailureSeverityType == 2
-                        ? heartFailureSeverity
+                        ? heartFailureSeverityMap
                         .get("Наличие хрипов в легких и/или повышенного давления в югулярных венах (II)")
-                        : heartFailureSeverity.get("Отсутствие признаков застойной сердечной недостаточности (I)");
+                        : heartFailureSeverityMap.get("Отсутствие признаков застойной сердечной недостаточности (I)");
                 byte cardiacArrest = (byte) (parametersByNames.get("cardiacArrest").byteValue() == 0 ? 39 : 0);
                 byte stSegmentDeviation = (byte) (parametersByNames.get("stSegmentDeviation").byteValue() == 0 ? 28 : 0);
                 byte cardiospecificEnzymesLevelIncrease = (byte) (parametersByNames
                         .get("cardiospecificEnzymesLevelIncrease").byteValue() == 0 ? 14 : 0);
-                return (double) (ageScore + heartRateScore + systolicBloodPressureScore + serumCreatinineScore
-                        + heartFailureSeverityScore + cardiacArrest + stSegmentDeviation
+                return (double) (age + heartRate + systolicBloodPressure + serumCreatinine
+                        + heartFailureSeverity + cardiacArrest + stSegmentDeviation
                         + cardiospecificEnzymesLevelIncrease);
             } catch (AlgorithmException e) {
                 e.printStackTrace();
