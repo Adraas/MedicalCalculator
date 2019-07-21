@@ -16,3 +16,6 @@ hs_err_pid*
 # IntelliJ IDEA project settings
 .idea/*
 *.iml
+
+# Apache Maven build result
+*/target/*
